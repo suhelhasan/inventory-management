@@ -1,0 +1,30 @@
+.Dashboard {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+.sidebarSection {
+  width: 17%;
+  height: 100%;
+}
+.mainSection {
+  display: flex;
+  flex-direction: column;
+  width: 83%;
+  height: 100%;
+}
+.mainSectionAddition {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.mainNavbar {
+  width: 100%;
+  height: 7%;
+}
+.multipleComponents {
+  width: 100%;
+  height: 93%;
+  padding: 0 2%;
+}

@@ -1,0 +1,43 @@
+.Sidebar {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-items: center;
+  background-color: #131a35;
+  color: rgb(202, 202, 202);
+}
+.productName {
+  width: 100%;
+  padding: 13px 0;
+  text-align: center;
+  background-color: #1c2144;
+  font-size: 19px;
+}
+.SidebarOptions {
+  margin-top: 100px;
+  width: 100%;
+}
+.SidebarOptions > div {
+  width: 100%;
+  padding-left: 15%;
+  padding-top: 7%;
+  padding-bottom: 7%;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  margin: 2px 0;
+  cursor: pointer;
+}
+.SidebarOptions > div:hover {
+  background-color: #1c2144;
+}
+.sidebarIcons {
+  margin-right: 10px;
+  font-size: 22px;
+}
+
+.activeClass {
+  background-color: #1c2144;
+}

@@ -1,0 +1,75 @@
+.HomePage {
+  height: 100vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-color: var(--light-blue);
+  padding: 60px 8% 0 8%;
+  color: var(--lightest-grey);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.HomePage a {
+  color: var(--lightest-grey);
+  text-decoration: none;
+  font-weight: bold;
+}
+.HomePage > img {
+  height: 100%;
+  width: 100%;
+}
+
+.textDiv {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.textDiv > h1 {
+  font-size: 50px;
+}
+.textDiv > p {
+  padding-top: 13px;
+  font-size: 22px;
+  font-weight: light;
+}
+.textDiv > .buttonSection {
+  padding-top: 35px;
+  display: flex;
+}
+
+.textDiv > .buttonSection div {
+  width: 140px;
+  height: 43px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--lightest-grey);
+  border-radius: 3px;
+  margin-right: 20px;
+}
+.button1 {
+  background-color: var(--lightest-grey);
+  color: var(--light-blue);
+}
+.button1:hover {
+  color: var(--lightest-grey);
+  background-color: var(--light-blue);
+}
+.button2:hover {
+  background-color: var(--lightest-grey);
+  color: var(--light-blue);
+}
+.arrow {
+  margin-left: 2px;
+}
+.imageDiv {
+  width: 50%;
+  height: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+.imageDiv img {
+  width: 90%;
+}

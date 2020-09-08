@@ -1,0 +1,17 @@
+.googleSignIn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 230px;
+  height: 50px;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  cursor: pointer;
+}
+.googleSignIn > img {
+  height: 60%;
+}
+.googleSignIn > p {
+  font-weight: bold;
+  color: gray;
+}

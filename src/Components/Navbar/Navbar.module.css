@@ -1,0 +1,33 @@
+.Navbar {
+  width: 100%;
+  padding: 0 8%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--lightest-grey);
+  position: fixed;
+  top: 0;
+}
+.Navbar a {
+  color: var(--lightest-grey);
+  text-decoration: none;
+}
+.logo {
+}
+.logoIcon {
+  font-size: 20px;
+}
+.navbarContent > .button {
+  padding: 8px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--lightest-grey);
+  border-radius: 5px;
+}
+.navbarContent > .button:hover {
+  background-color: var(--lightest-grey);
+  color: var(--light-blue);
+}

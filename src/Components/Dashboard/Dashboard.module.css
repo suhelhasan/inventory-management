@@ -6,9 +6,15 @@
 .sidebarSection {
   width: 17%;
   height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  position: fixed;
 }
 .mainSection {
   display: flex;
+  margin-left: 17%;
   flex-direction: column;
   width: 83%;
   height: 100%;
@@ -18,13 +24,25 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
+  margin: 0;
 }
 .mainNavbar {
+  width: 83%;
+  height: 47px;
+  top: 0;
+  right: 0;
+  position: fixed;
+}
+.mainNavbarAddition {
   width: 100%;
-  height: 7%;
+  height: 47px;
+  top: 0;
+  right: 0;
+  position: fixed;
 }
 .multipleComponents {
   width: 100%;
-  height: 93%;
+  height: 100%;
   padding: 0 2%;
+  margin-top: 47px;
 }

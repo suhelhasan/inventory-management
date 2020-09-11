@@ -27,7 +27,7 @@ function Home() {
             {loggedIn ? (
               <Link to="/dashboard">
                 <div className={styling.button1}>
-                  Go to Dashboard
+                  Dashboard
                   <RiArrowRightSLine className={styling.arrow} />
                 </div>
               </Link>

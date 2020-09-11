@@ -7,11 +7,91 @@
   padding: 0 2%;
   box-shadow: 0 8px 6px -6px rgb(207, 207, 207);
   color: rgb(95, 95, 95);
+  /* position: fixed;
+  top: 0; */
 }
 .Menu {
   cursor: pointer;
   font-size: 25px;
 }
 .Details {
+  height: 100%;
   display: flex;
+  align-items: center;
+  font-size: 19px;
+  /* position: relative; */
+}
+.Details > .sideIcon {
+  margin-right: 15px;
+  margin-left: 10px;
+}
+.userProfileDetails {
+  /* height: 200px; */
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+}
+.userProfileDetails > .userProfile {
+  display: flex;
+  align-items: center;
+  border-left: 1px solid rgb(219, 219, 219);
+  cursor: pointer;
+  border-left: 1px solid rgb(219, 219, 219);
+}
+.userProfileDetails > .userProfile > img {
+  width: 35px;
+  border-radius: 50%;
+  border: 1px solid grey;
+  margin-left: 15px;
+}
+.userProfileDetails > .userProfile > p {
+  font-size: 15px;
+  color: black;
+  margin: 0 4px;
+}
+.userProfileDetails > .userProfile > .downArrow {
+  font-size: 12px;
+}
+
+.userProfileDetails > .userProfileInfo {
+  /* width: 200px; */
+  text-align: center;
+  position: fixed;
+  top: 39px;
+  right: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userProfileDetails > .userProfileInfo > .userProfileInfoIcon {
+  width: 0px;
+  height: 0px;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid #131a35;
+}
+.userProfileDetails > .userProfileInfo > .userProfileInfoInner {
+  background-color: #131a35;
+  border-radius: 4px;
+}
+
+.userProfileDetails > .userProfileInfo > .userProfileInfoInner > p {
+  font-size: 16px;
+  color: rgb(194, 194, 194);
+  padding: 7px 10px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  width: 100%;
+}
+.userProfileDetails > .userProfileInfo > .userProfileInfoInner > p:last-child {
+  color: red;
+  cursor: pointer;
+  padding: 4px 10px 10px 10px;
+}
+.userProfileDetails
+  > .userProfileInfo
+  > .userProfileInfoInner
+  > p:last-child:hover {
+  background-color: #1c2144;
 }

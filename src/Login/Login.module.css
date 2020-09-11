@@ -1,3 +1,55 @@
+.logInPage {
+  width: 100%;
+  height: 100vh;
+  padding: 0 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #131a35;
+}
+
+.logInPageText {
+  height: 80%;
+  width: 50%;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #cecece;
+}
+.logInPageText > img {
+  width: 70%;
+}
+.logInPageTextHeading {
+  text-align: center;
+}
+
+.logInPageTextHeading > h1 {
+  color: #e2e2e2;
+}
+.logInPageTextHeading > h1 > a {
+  color: #e2e2e2;
+  text-decoration: none;
+}
+.logInPageActualSignIn {
+  /* height: 35%; */
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid red; */
+  text-align: center;
+  color: #e2e2e2;
+}
+.logInPageActualSignIn > h2 {
+  padding-bottom: 30px;
+}
+.logInPageActualSignIn > p {
+  padding-top: 20px;
+  width: 85%;
+}
 .googleSignIn {
   display: flex;
   justify-content: space-around;
@@ -7,11 +59,12 @@
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   cursor: pointer;
+  background-color: #e2e2e2;
 }
 .googleSignIn > img {
   height: 60%;
 }
 .googleSignIn > p {
   font-weight: bold;
-  color: gray;
+  color: #131a35;
 }

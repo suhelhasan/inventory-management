@@ -2,7 +2,7 @@
   height: 100vh;
   width: 100%;
   background-repeat: no-repeat;
-  background-color: var(--light-blue);
+  background-color: #131a35;
   padding: 60px 8% 0 8%;
   color: var(--lightest-grey);
   display: flex;
@@ -12,7 +12,7 @@
 .HomePage a {
   color: var(--lightest-grey);
   text-decoration: none;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 .HomePage > img {
   height: 100%;
@@ -51,15 +51,18 @@
 }
 .button1 {
   background-color: var(--lightest-grey);
-  color: var(--light-blue);
+  color: #131a35;
+  font-weight: bold;
 }
 .button1:hover {
   color: var(--lightest-grey);
-  background-color: var(--light-blue);
+  background-color: #131a35;
+  font-weight: lighter;
 }
 .button2:hover {
   background-color: var(--lightest-grey);
-  color: var(--light-blue);
+  color: #131a35;
+  font-weight: bold;
 }
 .arrow {
   margin-left: 2px;

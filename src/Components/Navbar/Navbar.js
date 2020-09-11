@@ -5,6 +5,7 @@ import firebase from "../../firebase/firebase";
 import { Link } from "react-router-dom";
 import styling from "./Navbar.module.css";
 import { BsGraphUp } from "react-icons/bs";
+// import { Link } from "react-router-dom";
 // import { SiGraphcool } from "react-icons/si";
 
 // import { ToastContainer, toast } from "react-toastify";
@@ -42,7 +43,9 @@ function Navbar() {
     <div className={styling.Navbar}>
       <div className={styling.logo}>
         <h2>
-          ShopManager <BsGraphUp className={styling.logoIcon} />{" "}
+          <Link to="/">
+            ShopManager <BsGraphUp className={styling.logoIcon} />
+          </Link>
         </h2>
       </div>
       <div className={styling.navbarContent}>
@@ -57,11 +60,9 @@ function Navbar() {
             Logout
           </div>
         ) : (
-          <div className={styling.button}>
-            <Link to="/signin" className="btn btn-primary">
-              Sign In
-            </Link>
-          </div>
+          <Link to="/signin" className="btn btn-primary">
+            <div className={styling.button}>Sign In</div>
+          </Link>
         )}
       </div>
       {/* <ToastContainer /> */}

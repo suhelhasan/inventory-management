@@ -18,16 +18,16 @@
 .logoIcon {
   font-size: 20px;
 }
-.navbarContent > .button {
-  padding: 8px 20px;
+.navbarContent .button {
+  padding: 7px 27px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid var(--lightest-grey);
-  border-radius: 5px;
+  border-radius: 3px;
 }
-.navbarContent > .button:hover {
+.navbarContent .button:hover {
   background-color: var(--lightest-grey);
-  color: var(--light-blue);
+  color: #131a35;
 }

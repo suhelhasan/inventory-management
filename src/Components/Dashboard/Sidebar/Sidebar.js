@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import styling from "./Sidebar.module.css";
-import { BsGraphUp } from "react-icons/bs";
+import { BsGraphUp, BsBuilding } from "react-icons/bs";
 import { VscHome } from "react-icons/vsc";
 import { BiPurchaseTagAlt, BiCart, BiRupee } from "react-icons/bi";
 import { FiUserPlus } from "react-icons/fi";
 import { AiOutlineStock, AiFillTag } from "react-icons/ai";
 import { GiReceiveMoney } from "react-icons/gi";
-import { FaHandHoldingUsd } from "react-icons/fa";
+import { FaHandHoldingUsd, FaRegBuilding } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Sidebar({ toggleComponent, activeStatus }) {
   return (
     <div className={styling.Sidebar}>
       <div className={styling.productName}>
-        ShopManager <BsGraphUp className={styling.logoIcon} />
+        <Link to="/">
+          ShopManager <BsGraphUp className={styling.logoIcon} />
+        </Link>
       </div>
       <div className={styling.SidebarOptions}>
         <div
@@ -54,6 +57,14 @@ function Sidebar({ toggleComponent, activeStatus }) {
           }
         >
           <FiUserPlus className={styling.sidebarIcons} /> Add suppliers
+        </div>
+        <div
+          onClick={() => toggleComponent("Registration")}
+          className={
+            activeStatus === "Registration" ? styling.activeClass : null
+          }
+        >
+          <BsBuilding className={styling.sidebarIcons} /> Register Shop
         </div>
       </div>
     </div>

@@ -12,15 +12,16 @@ import AddSuppliers from "./Content/AddSuppliers/AddSuppliers";
 import MyStocks from "./Content/MyStocks/MyStocks";
 import PurchaseItem from "./Content/PurchaseItem/PurchaseItem";
 import SellItem from "./Content/SellItem/SellItem";
+import Registration from "./Content/Registration/Registration";
 
 function Dashboard() {
-  // let loggedIn = useSelector((state) => state.isLogged);
+  let [viewComponent, setViewComponent] = useState(<Registration />);
+  let [activeStatus, setActiveStatus] = useState("Registration");
+  let [showSidebar, setShowSidebar] = useState(true);
+  let loggedIn = useSelector((state) => state.isLogged);
   // if (!loggedIn) {
   //   return <Redirect to="signin" />;
   // }
-  let [viewComponent, setViewComponent] = useState(<Home />);
-  let [activeStatus, setActiveStatus] = useState("Home");
-  let [showSidebar, setShowSidebar] = useState(true);
 
   let toggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -48,6 +49,10 @@ function Dashboard() {
         setViewComponent(<SellItem />);
         setActiveStatus("SellItem");
         break;
+      case "Registration":
+        setViewComponent(<Registration />);
+        setActiveStatus("Registration");
+        break;
       default:
         setViewComponent(<Home />);
         setActiveStatus("Home");
@@ -69,7 +74,11 @@ function Dashboard() {
           showSidebar ? styling.mainSection : styling.mainSectionAddition
         }
       >
-        <div className={styling.mainNavbar}>
+        <div
+          className={
+            showSidebar ? styling.mainNavbar : styling.mainNavbarAddition
+          }
+        >
           <Navbar toggleSidebar={toggleSidebar} />
         </div>
 

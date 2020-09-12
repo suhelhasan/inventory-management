@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { isLoggedIn } from "../../redux/actions/actions";
+import { isLoggedIn, userDetails } from "../../redux/actions/actions";
 import firebase from "../../firebase/firebase";
 import { Link } from "react-router-dom";
 import styling from "./Navbar.module.css";
@@ -33,6 +33,7 @@ function Navbar() {
       .signOut()
       .then(function () {
         dispatch(isLoggedIn());
+        dispatch(userDetails({}));
         console.log("Sign Out SuccessFull");
       })
       .catch(function (error) {

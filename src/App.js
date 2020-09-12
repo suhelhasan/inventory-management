@@ -7,14 +7,40 @@ import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
-
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(function (user) {
+    console.log("hello");
+
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // console.log("hello hello hello hello", user);
+        let { displayName, email, photoURL, uid } = user;
+        // console.log("hello", user);
+
         dispatch(isLoggedIn());
-        let { displayName, email, photoURL } = user;
-        dispatch(userDetails({ displayName, email, photoURL }));
+        console.log("hello hello hello");
+        const db = firebase.firestore();
+
+        db.collection("users")
+          .doc(uid)
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              dispatch(userDetails(doc.data()));
+              console.log("Document data:", doc.data());
+              // alert("hello");
+            } else {
+              let id = uid;
+              let name = displayName;
+              let photo = photoURL;
+              dispatch(userDetails({ name, photo, id, email }));
+
+              console.log("No such document!");
+            }
+          })
+          .catch(function (error) {
+            console.log("Error getting document:", error);
+          });
+      } else {
+        console.log("Signed Out");
       }
     });
   }, [dispatch]);

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
 import styling from "./Dashboard.module.css";
@@ -12,16 +11,22 @@ import AddSuppliers from "./Content/AddSuppliers/AddSuppliers";
 import MyStocks from "./Content/MyStocks/MyStocks";
 import PurchaseItem from "./Content/PurchaseItem/PurchaseItem";
 import SellItem from "./Content/SellItem/SellItem";
-import Registration from "./Content/Registration/Registration";
+import Registration from "../RegisterShop/Registration/Registration";
+// import { useEffect } from "react";
 
 function Dashboard() {
-  let [viewComponent, setViewComponent] = useState(<Registration />);
-  let [activeStatus, setActiveStatus] = useState("Registration");
-  let [showSidebar, setShowSidebar] = useState(true);
+  let shopDetails = useSelector((state) => state.user.shopDetails);
   let loggedIn = useSelector((state) => state.isLogged);
-  // if (!loggedIn) {
-  //   return <Redirect to="signin" />;
-  // }
+
+  let [viewComponent, setViewComponent] = useState(<Home />);
+  let [activeStatus, setActiveStatus] = useState("Home");
+  let [showSidebar, setShowSidebar] = useState(true);
+
+  if (!loggedIn) {
+    return <Redirect to="/signin" />;
+  } else if (!shopDetails) {
+    return <Redirect to="/register" />;
+  }
 
   let toggleSidebar = () => {
     setShowSidebar(!showSidebar);

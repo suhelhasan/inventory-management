@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import styling from "./Sidebar.module.css";
 import { BsGraphUp, BsBuilding } from "react-icons/bs";
 import { VscHome } from "react-icons/vsc";
 import { BiPurchaseTagAlt, BiCart, BiRupee } from "react-icons/bi";
 import { FiUserPlus } from "react-icons/fi";
-import { AiOutlineStock, AiFillTag } from "react-icons/ai";
-import { GiReceiveMoney } from "react-icons/gi";
-import { FaHandHoldingUsd, FaRegBuilding } from "react-icons/fa";
+import { AiOutlineStock } from "react-icons/ai";
 import { Link } from "react-router-dom";
+// import { useSelector } from "react-redux";
 
 function Sidebar({ toggleComponent, activeStatus }) {
+  // let registerShop = useSelector((state) => state.user.shopDetails);
+
   return (
     <div className={styling.Sidebar}>
       <div className={styling.productName}>
@@ -58,13 +59,15 @@ function Sidebar({ toggleComponent, activeStatus }) {
         >
           <FiUserPlus className={styling.sidebarIcons} /> Add suppliers
         </div>
+
         <div
           onClick={() => toggleComponent("Registration")}
           className={
             activeStatus === "Registration" ? styling.activeClass : null
           }
         >
-          <BsBuilding className={styling.sidebarIcons} /> Register Shop
+          <BsBuilding className={styling.sidebarIcons} />
+          Update Details
         </div>
       </div>
     </div>

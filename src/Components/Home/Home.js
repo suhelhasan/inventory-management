@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
-import firebase from "../../firebase/firebase";
-import { isLoggedIn } from "../../redux/actions/actions";
+import React from "react";
+import { useSelector } from "react-redux";
 import Navbar from "../Navbar/Navbar";
 import { Link } from "react-router-dom";
 import styling from "./Home.module.css";
 import coverImage from "../../assets/coverPageImage.svg";
-import { BiRightArrowAlt } from "react-icons/bi";
 import { RiArrowRightSLine } from "react-icons/ri";
 function Home() {
   let loggedIn = useSelector((state) => state.isLogged);

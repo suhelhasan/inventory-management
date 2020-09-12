@@ -1,18 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import firebase from "../firebase/firebase";
 import icon from "../assets/googleLogo.png";
 import styling from "./Login.module.css";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { BsGraphUp } from "react-icons/bs";
-import loginImage from "../assets/signIn9.svg";
+// import { BsGraphUp } from "react-icons/bs";
+import loginImage from "../assets/signInPage.svg";
 
 function Login() {
-  let loggedIn = useSelector((state) => state.isLogged);
+  let isLogged = useSelector((state) => state.isLogged);
+  let shopDetails = useSelector((state) => state.user.shopDetails);
 
-  if (loggedIn) {
+  if (isLogged && shopDetails) {
     return <Redirect to="/dashboard" />;
+  } else if (isLogged && !shopDetails) {
+    return <Redirect to="/register" />;
   }
 
   let loginWithGoogle = () => {
@@ -28,7 +31,7 @@ function Login() {
           .get()
           .then((doc) => {
             if (doc.exists) {
-              console.log("User is already registered");
+              console.log("User is already registered", doc.data());
             } else {
               db.collection("users")
                 .doc(user.uid)
@@ -36,6 +39,7 @@ function Login() {
                   name: user.displayName,
                   email: user.email,
                   photo: user.photoURL,
+                  id: user.uid,
                 })
                 .then((docRef) => {
                   console.log("Welcome new user");
@@ -58,15 +62,16 @@ function Login() {
     <div className={styling.logInPage}>
       <div className={styling.logInPageText}>
         {/* <div className={styling.logInPageTextHeading}>
-          <h1>
+          <h2>
             Welcome to <Link to="/">ShopManager</Link>
-          </h1>
-          <p>Built to make your work easier.</p>
+          </h2>
         </div> */}
         <img src={loginImage} alt="login" />
       </div>
       <div className={styling.logInPageActualSignIn}>
-        <h2>Sign in to use Shop Manager, It is safe and secure.</h2>
+        <h2>
+          Sign in to use <Link to="/">ShopManager</Link>, It is safe and secure.
+        </h2>
         <div className={styling.googleSignIn} onClick={loginWithGoogle}>
           <img src={icon} alt="logo" />
           <p>Sign in with Google</p>

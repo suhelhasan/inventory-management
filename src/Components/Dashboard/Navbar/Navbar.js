@@ -1,23 +1,16 @@
 import React, { useState } from "react";
 import styling from "./Navbar.module.css";
-import { FiMenu, FiBell, FiInfo } from "react-icons/fi";
-import { BiCaretDown, BiUserCircle } from "react-icons/bi";
+import { FiMenu, FiBell } from "react-icons/fi";
+import { BiCaretDown } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
-import { isLoggedIn } from "../../../redux/actions/actions";
+import { isLoggedIn, userDetails } from "../../../redux/actions/actions";
 import { AiOutlinePoweroff } from "react-icons/ai";
-import { IoMdArrowDropup } from "react-icons/io";
 import firebase from "../../../firebase/firebase";
-import { Redirect } from "react-router-dom";
 
 function Navbar({ toggleSidebar }) {
   let user = useSelector((state) => state.user);
-  let isLogged = useSelector((state) => state.isLogged);
   let [showInfo, setShowInfo] = useState(false);
   const dispatch = useDispatch();
-
-  // if (!isLogged) {
-  //   return <Redirect to="signin" />;
-  // }
 
   let logoutfromGoogle = () => {
     firebase
@@ -25,6 +18,7 @@ function Navbar({ toggleSidebar }) {
       .signOut()
       .then(function () {
         dispatch(isLoggedIn());
+        dispatch(userDetails({}));
         console.log("Sign Out SuccessFull");
       })
       .catch(function (error) {
@@ -43,8 +37,8 @@ function Navbar({ toggleSidebar }) {
             className={styling.userProfile}
             onClick={() => setShowInfo(!showInfo)}
           >
-            <img src={user.photoURL} alt={user.displayName} />
-            <p>{user.displayName}</p>
+            <img src={user.photo} alt={user.name} />
+            <p>{user.name}</p>
             <BiCaretDown className={styling.downArrow} />
           </div>
           {showInfo ? (

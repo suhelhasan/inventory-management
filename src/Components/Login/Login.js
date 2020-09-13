@@ -1,12 +1,11 @@
 import React from "react";
-import firebase from "../firebase/firebase";
-import icon from "../assets/googleLogo.png";
+import firebase from "../../firebase/firebase";
+import icon from "../../assets/googleLogo.png";
 import styling from "./Login.module.css";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
-// import { BsGraphUp } from "react-icons/bs";
-import loginImage from "../assets/signInPage.svg";
+import loginImage from "../../assets/signInPage.svg";
 
 function Login() {
   let isLogged = useSelector((state) => state.isLogged);
@@ -61,11 +60,6 @@ function Login() {
   return (
     <div className={styling.logInPage}>
       <div className={styling.logInPageText}>
-        {/* <div className={styling.logInPageTextHeading}>
-          <h2>
-            Welcome to <Link to="/">ShopManager</Link>
-          </h2>
-        </div> */}
         <img src={loginImage} alt="login" />
       </div>
       <div className={styling.logInPageActualSignIn}>

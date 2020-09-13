@@ -7,8 +7,6 @@
   padding: 0 2%;
   box-shadow: 0 8px 10px -6px rgb(211, 210, 210);
   color: rgb(95, 95, 95);
-  /* position: fixed;
-  top: 0; */
 }
 .Menu {
   cursor: pointer;
@@ -19,15 +17,12 @@
   display: flex;
   align-items: center;
   font-size: 19px;
-  /* position: relative; */
 }
 .Details > .sideIcon {
   margin-right: 15px;
   margin-left: 10px;
 }
 .userProfileDetails {
-  /* height: 200px; */
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
 }

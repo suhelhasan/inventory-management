@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "./Navbar/Navbar";
 import { Link } from "react-router-dom";
 import styling from "./Home.module.css";
 import coverImage from "../../assets/coverPageImage.svg";

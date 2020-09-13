@@ -2,18 +2,14 @@
   width: 100%;
   height: 100vh;
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
-  /* background-color: #e2e2e2; */
   background-color: #131a35;
-
   color: #e2e2e2;
 }
 .imageSection {
   width: 25%;
   height: 100%;
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -34,5 +30,4 @@
 .RegForm {
   width: 75%;
   height: 100%;
-  /* border: 1px solid red; */
 }

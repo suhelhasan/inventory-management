@@ -14,6 +14,8 @@ import SellItem from "./Content/SellItem/SellItem";
 import Registration from "../RegisterShop/Registration/Registration";
 // import { useEffect } from "react";
 
+import AddChannel from "./Sidebar/AddChannels/AddChannels";
+
 function Dashboard() {
   let shopDetails = useSelector((state) => state.user.shopDetails);
   let loggedIn = useSelector((state) => state.isLogged);
@@ -21,6 +23,11 @@ function Dashboard() {
   let [viewComponent, setViewComponent] = useState(<Home />);
   let [activeStatus, setActiveStatus] = useState("Home");
   let [showSidebar, setShowSidebar] = useState(true);
+  let [showAddChannel, setShowAddChannel] = useState(false);
+
+  function toggleAddChannel() {
+    setShowAddChannel(!showAddChannel);
+  }
 
   if (!loggedIn) {
     return <Redirect to="/signin" />;
@@ -65,31 +72,35 @@ function Dashboard() {
   }
 
   return (
-    <div className={styling.Dashboard}>
-      {showSidebar ? (
-        <div className={styling.sidebarSection}>
-          <Sidebar
-            toggleComponent={changeComponent}
-            activeStatus={activeStatus}
-          />
-        </div>
-      ) : null}
-      <div
-        className={
-          showSidebar ? styling.mainSection : styling.mainSectionAddition
-        }
-      >
+    <>
+      <div className={styling.Dashboard}>
+        {showSidebar ? (
+          <div className={styling.sidebarSection}>
+            <Sidebar
+              showAddChannel={toggleAddChannel}
+              toggleComponent={changeComponent}
+              activeStatus={activeStatus}
+            />
+          </div>
+        ) : null}
         <div
           className={
-            showSidebar ? styling.mainNavbar : styling.mainNavbarAddition
+            showSidebar ? styling.mainSection : styling.mainSectionAddition
           }
         >
-          <Navbar toggleSidebar={toggleSidebar} />
-        </div>
+          <div
+            className={
+              showSidebar ? styling.mainNavbar : styling.mainNavbarAddition
+            }
+          >
+            <Navbar toggleSidebar={toggleSidebar} />
+          </div>
 
-        <div className={styling.multipleComponents}>{viewComponent}</div>
+          <div className={styling.multipleComponents}>{viewComponent}</div>
+        </div>
       </div>
-    </div>
+      {showAddChannel ? <AddChannel showAddChannel={toggleAddChannel} /> : null}
+    </>
   );
 }
 

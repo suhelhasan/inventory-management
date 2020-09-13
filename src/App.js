@@ -13,7 +13,6 @@ function App() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         let { displayName, email, photoURL, uid } = user;
-        // console.log("hello", user);
 
         dispatch(isLoggedIn());
         console.log("hello hello hello");
@@ -26,7 +25,6 @@ function App() {
             if (doc.exists) {
               dispatch(userDetails(doc.data()));
               console.log("Document data:", doc.data());
-              // alert("hello");
             } else {
               let id = uid;
               let name = displayName;

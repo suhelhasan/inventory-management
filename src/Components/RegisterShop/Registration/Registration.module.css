@@ -7,7 +7,6 @@
   align-items: center;
   color: #131a35;
   background-color: #e2e2e2;
-  /* border-radius: 0 20vh 0 0; */
 }
 form {
   width: 90%;
@@ -73,6 +72,9 @@ form > h2 {
   background-color: #131a35;
   color: #e2e2e2;
   cursor: pointer;
+  border: none;
+  font-weight: light;
+  font-size: 17px;
 }
 .submitDiv > .submitButton:hover {
   border: 1px solid #131a35;

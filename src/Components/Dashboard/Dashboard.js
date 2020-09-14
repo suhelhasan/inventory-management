@@ -13,8 +13,9 @@ import PurchaseItem from "./Content/PurchaseItem/PurchaseItem";
 import SellItem from "./Content/SellItem/SellItem";
 import Registration from "../RegisterShop/Registration/Registration";
 // import { useEffect } from "react";
+import { notify, ToastContainer } from "../Notify/Notify";
 
-import AddChannel from "./Sidebar/AddChannels/AddChannels";
+import AddChannel from "./AddChannels/AddChannels";
 
 function Dashboard() {
   let shopDetails = useSelector((state) => state.user.shopDetails);
@@ -24,10 +25,6 @@ function Dashboard() {
   let [activeStatus, setActiveStatus] = useState("Home");
   let [showSidebar, setShowSidebar] = useState(true);
   let [showAddChannel, setShowAddChannel] = useState(false);
-
-  function toggleAddChannel() {
-    setShowAddChannel(!showAddChannel);
-  }
 
   if (!loggedIn) {
     return <Redirect to="/signin" />;
@@ -70,14 +67,16 @@ function Dashboard() {
         setActiveStatus("Home");
     }
   }
-
+  function toggleAddChannel() {
+    setShowAddChannel(!showAddChannel);
+  }
   return (
     <>
       <div className={styling.Dashboard}>
         {showSidebar ? (
           <div className={styling.sidebarSection}>
             <Sidebar
-              showAddChannel={toggleAddChannel}
+              showAddChannel={() => toggleAddChannel()}
               toggleComponent={changeComponent}
               activeStatus={activeStatus}
             />
@@ -99,7 +98,8 @@ function Dashboard() {
           <div className={styling.multipleComponents}>{viewComponent}</div>
         </div>
       </div>
-      {showAddChannel ? <AddChannel showAddChannel={toggleAddChannel} /> : null}
+      <ToastContainer />
+      {showAddChannel ? <AddChannel toggleChannel={toggleAddChannel} /> : null}
     </>
   );
 }

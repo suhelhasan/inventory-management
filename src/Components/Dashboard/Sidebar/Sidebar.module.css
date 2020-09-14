@@ -3,8 +3,9 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-items: center;
+  /* align-items: flex-start; */
+
+  justify-content: space-between;
   background-color: #131a35;
   color: rgb(202, 202, 202);
 }
@@ -20,7 +21,7 @@
   text-decoration: none;
 }
 .SidebarOptions {
-  margin-top: 80px;
+  margin-top: 40px;
   width: 100%;
 }
 .SidebarOptions > div {
@@ -46,16 +47,30 @@
   background-color: #1c2144;
 }
 .salesChannel {
-  margin-top: 50px;
+  margin-top: 20px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.salesChannel > p {
+  padding-left: 15%;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+.salesChannel > .channelDiv {
+  width: 100%;
+  height: auto;
+}
+.AddSalesChannel {
+  width: 100%;
+  cursor: pointer;
   padding-left: 15%;
   padding-top: 7%;
   padding-bottom: 7%;
-  font-size: 16px;
   display: flex;
   align-items: center;
-  cursor: pointer;
 }
-.salesChannel:hover {
+.AddSalesChannel:hover {
   background-color: #1c2144;
 }

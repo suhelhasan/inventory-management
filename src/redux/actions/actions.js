@@ -10,3 +10,10 @@ export const userDetails = (details) => {
     payload: details,
   };
 };
+
+export const salesChannelAction = (details) => {
+  return {
+    type: "SALES_CHANNEL",
+    payload: details,
+  };
+};

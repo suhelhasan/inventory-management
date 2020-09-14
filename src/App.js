@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import Routing from "./routing/Routing";
 import firebase from "./firebase/firebase";
 import { useDispatch } from "react-redux";
-import { isLoggedIn, userDetails } from "./redux/actions/actions";
+import {
+  isLoggedIn,
+  userDetails,
+  salesChannelAction,
+} from "./redux/actions/actions";
 import "./App.css";
 
 function App() {
@@ -24,7 +28,7 @@ function App() {
           .then((doc) => {
             if (doc.exists) {
               dispatch(userDetails(doc.data()));
-              console.log("Document data:", doc.data());
+              dispatch(salesChannelAction(doc.data().userSalesChannels));
             } else {
               let id = uid;
               let name = displayName;

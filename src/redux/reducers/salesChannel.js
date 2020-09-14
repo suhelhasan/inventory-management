@@ -1,9 +1,9 @@
-const user = (state = {}, action) => {
+const salesChannel = (state = [], action) => {
   switch (action.type) {
-    case "USER_DETAILS":
+    case "SALES_CHANNEL":
       return { ...state, ...action.payload };
     default:
       return state;
   }
 };
-export default user;
+export default salesChannel;

@@ -1,0 +1,31 @@
+.ChannelLinks {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.ChannelLinks a {
+  width: 100%;
+  color: rgb(202, 202, 202);
+  text-decoration: none;
+  font-size: 17px;
+}
+.channel {
+  width: 100%;
+  padding-left: 15%;
+  padding-top: 4%;
+  padding-bottom: 4%;
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+  margin: 1px 0;
+}
+.channel:hover {
+  background-color: #1c2144;
+}
+.socialIcons {
+  margin-right: 10px;
+  font-size: 22px;
+}

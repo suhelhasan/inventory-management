@@ -17,3 +17,10 @@ export const salesChannelAction = (details) => {
     payload: details,
   };
 };
+
+export const salesItem = (details) => {
+  return {
+    type: "ADD_ITEMS",
+    payload: details,
+  };
+};

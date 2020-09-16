@@ -1,2 +1,48 @@
 .MyStocks {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  width: 100%;
+  height: 100%;
+  padding-top: 20px;
+}
+.MyStocks > table {
+  width: 100%;
+  /* height: 100%; */
+  text-align: center;
+  border-collapse: collapse;
+}
+.MyStocks > table th {
+  background-color: #131a35;
+  background-color: #cfcfcf;
+  padding: 15px 0;
+  color: #131a35;
+  border-left: 1px solid #e2e2e2;
+}
+
+.MyStocks > table td {
+  padding: 15px 0;
+  color: #131a35;
+  text-transform: capitalize;
+  border-left: 1px solid #cfcfcf;
+  border-bottom: 1px solid #cfcfcf;
+}
+.MyStocks > table td:last-child {
+  border-right: 1px solid #cfcfcf;
+}
+.editIcon {
+  color: green;
+  font-size: 21px;
+  margin: 0 7px;
+}
+.editIcon:hover {
+  opacity: 0.7;
+}
+.deleteIcon {
+  color: red;
+  font-size: 21px;
+  margin: 0 7px;
+}
+.deleteIcon:hover {
+  opacity: 0.7;
 }

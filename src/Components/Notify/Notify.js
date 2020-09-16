@@ -3,8 +3,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 const notify = (type, message) =>
   toast[type](message, {
-    position: "bottom-right",
-    autoClose: 3000,
+    position: "top-right",
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

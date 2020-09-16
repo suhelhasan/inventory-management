@@ -6,6 +6,7 @@ import {
   isLoggedIn,
   userDetails,
   salesChannelAction,
+  salesItem,
 } from "./redux/actions/actions";
 import "./App.css";
 
@@ -29,6 +30,7 @@ function App() {
             if (doc.exists) {
               dispatch(userDetails(doc.data()));
               dispatch(salesChannelAction(doc.data().userSalesChannels));
+              dispatch(salesItem(doc.data().products));
             } else {
               let id = uid;
               let name = displayName;

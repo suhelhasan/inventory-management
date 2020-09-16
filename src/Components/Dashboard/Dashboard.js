@@ -13,7 +13,7 @@ import PurchaseItem from "./Content/PurchaseItem/PurchaseItem";
 import SellItem from "./Content/SellItem/SellItem";
 import Registration from "../RegisterShop/Registration/Registration";
 // import { useEffect } from "react";
-import { notify, ToastContainer } from "../Notify/Notify";
+// import { notify, ToastContainer } from "../Notify/Notify";
 
 import AddChannel from "./AddChannels/AddChannels";
 
@@ -21,8 +21,8 @@ function Dashboard() {
   let shopDetails = useSelector((state) => state.user.shopDetails);
   let loggedIn = useSelector((state) => state.isLogged);
 
-  let [viewComponent, setViewComponent] = useState(<Home />);
-  let [activeStatus, setActiveStatus] = useState("Home");
+  let [viewComponent, setViewComponent] = useState(<AddItem />);
+  let [activeStatus, setActiveStatus] = useState("AddItem");
   let [showSidebar, setShowSidebar] = useState(true);
   let [showAddChannel, setShowAddChannel] = useState(false);
 
@@ -98,7 +98,6 @@ function Dashboard() {
           <div className={styling.multipleComponents}>{viewComponent}</div>
         </div>
       </div>
-      <ToastContainer />
       {showAddChannel ? <AddChannel toggleChannel={toggleAddChannel} /> : null}
     </>
   );

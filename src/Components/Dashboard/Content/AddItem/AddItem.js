@@ -11,7 +11,7 @@ function AddItem() {
   let [measurment, setMeasurment] = useState("pieces");
   let [costPrice, setCostPrice] = useState("");
   let [sellingPrice, setSellingPrice] = useState("");
-  let [totalItems, setTotalItems] = useState("");
+  // let [totalItems, setTotalItems] = useState("");
   let [itemsArray, setItemsArray] = useState([]);
 
   let userInfo = useSelector((state) => state.user);
@@ -19,7 +19,7 @@ function AddItem() {
   let dispatch = useDispatch();
 
   useEffect(() => {
-    setTotalItems(allItems);
+    // setTotalItems(allItems);
 
     let localArr = [];
     for (let item of Object.entries(allItems)) {
@@ -61,7 +61,7 @@ function AddItem() {
           setMeasurment("pieces");
           setCostPrice("");
           setSellingPrice("");
-          dispatch(salesItem({ ...totalItems, ...products }));
+          dispatch(salesItem({ ...products }));
           notify("success", "Added data successfully");
           console.log("Added data successfully");
         })

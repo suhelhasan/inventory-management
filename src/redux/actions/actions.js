@@ -24,3 +24,34 @@ export const salesItem = (details) => {
     payload: details,
   };
 };
+
+export const customerItems = (details) => {
+  return {
+    type: "CUSTOMER_ITEMS",
+    payload: details,
+  };
+};
+export const removeCustomerItems = (details) => {
+  return {
+    type: "REMOVE_CUSTOMER_ITEMS",
+    payload: details,
+  };
+};
+export const removeAllCustomerItems = (details) => {
+  return {
+    type: "REMOVE_ALL_ITEMS",
+    payload: details,
+  };
+};
+export const allCustomers = (details) => {
+  return {
+    type: "CUSTOMERS",
+    payload: details,
+  };
+};
+export const deleteCustomer = (details) => {
+  return {
+    type: "DELETE_CUSTOMER",
+    payload: details,
+  };
+};

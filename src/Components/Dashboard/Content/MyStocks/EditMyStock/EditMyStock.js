@@ -12,7 +12,6 @@ function EditMyStock({ toggleEditScreen, itemDetails }) {
   let [measurment, setMeasurment] = useState("pieces");
   let [costPrice, setCostPrice] = useState("");
   let [sellingPrice, setSellingPrice] = useState("");
-  let allItems = useSelector((state) => state.salesItem);
   let userInfo = useSelector((state) => state.user);
   let dispatch = useDispatch();
 
@@ -41,18 +40,19 @@ function EditMyStock({ toggleEditScreen, itemDetails }) {
         costPrice: parseInt(costPrice),
         sellingPrice: parseInt(sellingPrice),
       };
-      let products = { ...allItems };
-      products[itemName] = itemDetails;
+      // let products = { ...allItems };
+      // let products = { ...allItems };
+      // products[itemName] = itemDetails;
 
       const db = firebase.firestore();
       db.collection("users")
         .doc(userInfo.id)
         .update({
-          products,
+          [`products.${itemName}`]: itemDetails,
         })
         .then(() => {
           toggleEditScreen("added");
-          dispatch(salesItem({ ...products }));
+          dispatch(salesItem({ [`${itemName}`]: itemDetails }));
           console.log("Added data successfully");
         })
         .catch((error) => {

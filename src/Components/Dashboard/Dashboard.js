@@ -12,6 +12,7 @@ import MyStocks from "./Content/MyStocks/MyStocks";
 import PurchaseItem from "./Content/PurchaseItem/PurchaseItem";
 import SellItem from "./Content/SellItem/SellItem";
 import Registration from "../RegisterShop/Registration/Registration";
+import Customers from "./Content/Customers/Customers";
 // import { useEffect } from "react";
 // import { notify, ToastContainer } from "../Notify/Notify";
 
@@ -21,8 +22,8 @@ function Dashboard() {
   let shopDetails = useSelector((state) => state.user.shopDetails);
   let loggedIn = useSelector((state) => state.isLogged);
 
-  let [viewComponent, setViewComponent] = useState(<AddItem />);
-  let [activeStatus, setActiveStatus] = useState("AddItem");
+  let [viewComponent, setViewComponent] = useState(<SellItem />);
+  let [activeStatus, setActiveStatus] = useState("SellItem");
   let [showSidebar, setShowSidebar] = useState(true);
   let [showAddChannel, setShowAddChannel] = useState(false);
 
@@ -61,6 +62,10 @@ function Dashboard() {
       case "Registration":
         setViewComponent(<Registration />);
         setActiveStatus("Registration");
+        break;
+      case "Customers":
+        setViewComponent(<Customers />);
+        setActiveStatus("Customers");
         break;
       default:
         setViewComponent(<Home />);

@@ -2,6 +2,8 @@ import isLogged from "./isLogged";
 import user from "./user";
 import salesChannel from "./salesChannel";
 import salesItem from "./salesItem";
+import userCart from "./customerItems";
+import customers from "./customers";
 
 import { combineReducers } from "redux";
 
@@ -10,4 +12,6 @@ export const allReducers = combineReducers({
   user,
   salesChannel,
   salesItem,
+  userCart,
+  customers,
 });

@@ -1,0 +1,27 @@
+.UserCart {
+  margin-top: 40px;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+.UserCart th {
+  background-color: #131a35;
+  background-color: #cfcfcf;
+  padding: 15px 0;
+  color: #131a35;
+  border-left: 1px solid #e2e2e2;
+}
+.UserCart td {
+  padding: 15px 0;
+  color: #131a35;
+  text-transform: capitalize;
+  border-left: 1px solid #cfcfcf;
+  border-bottom: 1px solid #cfcfcf;
+}
+.UserCart td:last-child {
+  border-right: 1px solid #cfcfcf;
+}
+.deleteIcon {
+  color: red;
+  font-size: 22px;
+}

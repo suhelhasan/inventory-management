@@ -9,6 +9,7 @@ import { AiOutlineStock } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { MdAdd } from "react-icons/md";
 import ChannelLinks from "./ChannelLinks/ChannelLinks";
+import { FiUsers } from "react-icons/fi";
 
 function Sidebar({ toggleComponent, activeStatus, showAddChannel }) {
   return (
@@ -42,6 +43,12 @@ function Sidebar({ toggleComponent, activeStatus, showAddChannel }) {
           className={activeStatus === "MyStocks" ? styling.activeClass : null}
         >
           <AiOutlineStock className={styling.sidebarIcons} /> My Stocks
+        </div>
+        <div
+          onClick={() => toggleComponent("Customers")}
+          className={activeStatus === "Customers" ? styling.activeClass : null}
+        >
+          <FiUsers className={styling.sidebarIcons} /> Customers
         </div>
 
         <div

@@ -1,11 +1,129 @@
-import React from "react";
+import React, { useState } from "react";
 import styling from "./SellItem.module.css";
+import { notify, ToastContainer } from "../../../Notify/Notify";
+import ProductInput from "./ProductInput/ProductInput";
+import UserCart from "./UserCart/UserCart";
+import { useDispatch, useSelector } from "react-redux";
+import firebase from "../../../../firebase/firebase";
+import {
+  allCustomers,
+  salesItem,
+  removeAllCustomerItems,
+} from "../../../../redux/actions/actions";
 
 function SellItem() {
+  let [customerName, setCustomerName] = useState("");
+  let [customerPhone, setCustomerPhone] = useState("");
+  let userCart = useSelector((state) => state.userCart);
+  let userInfo = useSelector((state) => state.user);
+  let allItems = useSelector((state) => state.salesItem);
+  let dispatch = useDispatch();
+
+  let doTask = () => {
+    if (customerName.length > 2 && customerPhone.length > 4) {
+      // Add customer to DB
+      let customers = {};
+      customers[customerPhone] = { customerName, customerPhone };
+      const db = firebase.firestore();
+      db.collection("users")
+        .doc(userInfo.id)
+        .set(
+          {
+            customers,
+          },
+          { merge: true }
+        )
+        .then(() => {
+          notify("success", "Customer Info Added");
+          dispatch(allCustomers(customers));
+        })
+        .catch((error) => {
+          notify("error", "Customer not added");
+          console.error("Error adding document: ", error);
+        });
+
+      // Updating stock
+
+      let products = { ...allItems };
+      for (let i = 0; i < userCart.length; i++) {
+        products[userCart[i].itemName].quantity -= userCart[i].quantity;
+      }
+      db.collection("users")
+        .doc(userInfo.id)
+        .update({
+          products,
+        })
+        .then(() => {
+          setCustomerName("");
+          setCustomerPhone("");
+          notify("success", "Updated Stock successfully");
+          dispatch(salesItem({ ...products }));
+          dispatch(removeAllCustomerItems([]));
+          console.log("Added data successfully");
+        })
+        .catch((error) => {
+          notify("error", "error updating stocks");
+          console.error("Error adding document: ", error);
+        });
+    } else {
+      notify("error", "Enter valid user name and phone number");
+    }
+  };
+
   return (
-    <div className={styling.SellItem}>
-      <h1>Sell Item</h1>
-    </div>
+    <>
+      <div className={styling.SellItem}>
+        <table cellspacing="0">
+          <tr>
+            <th>Customer Name</th>
+            <th>Customer Phone</th>
+          </tr>
+          <tr>
+            <td>
+              <input
+                type="text"
+                placeholder="customer name"
+                value={customerName}
+                onChange={(e) => setCustomerName(e.target.value)}
+              />
+            </td>
+            <td>
+              <input
+                type="number"
+                placeholder="customer phone"
+                value={customerPhone}
+                onChange={(e) => setCustomerPhone(e.target.value)}
+              />
+            </td>
+          </tr>
+        </table>
+
+        <ProductInput />
+
+        <UserCart doTask={doTask} />
+        {userCart.length ? (
+          <div className={styling.buttonsDiv}>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                alert("Printed");
+              }}
+            >
+              Print
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                doTask();
+              }}
+            >
+              Done
+            </button>
+          </div>
+        ) : null}
+      </div>
+      <ToastContainer />
+    </>
   );
 }
 

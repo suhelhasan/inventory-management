@@ -1,4 +1,4 @@
-const salesChannel = (state = [], action) => {
+const salesChannel = (state = {}, action) => {
   switch (action.type) {
     case "SALES_CHANNEL":
       return { ...state, ...action.payload };

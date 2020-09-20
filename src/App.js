@@ -7,6 +7,7 @@ import {
   userDetails,
   salesChannelAction,
   salesItem,
+  allCustomers,
 } from "./redux/actions/actions";
 import "./App.css";
 
@@ -31,6 +32,7 @@ function App() {
               dispatch(userDetails(doc.data()));
               dispatch(salesChannelAction(doc.data().userSalesChannels));
               dispatch(salesItem(doc.data().products));
+              dispatch(allCustomers(doc.data().customers));
             } else {
               let id = uid;
               let name = displayName;

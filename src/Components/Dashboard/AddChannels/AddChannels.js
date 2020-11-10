@@ -19,7 +19,7 @@ function AddChannels({ toggleChannel }) {
   let [youtube, setYoutube] = useState("");
   let [amazon, setAmazon] = useState("");
   let [updateChannel, setUpdateChannel] = useState(false);
-  console.log(salesChannel);
+  // console.log(salesChannel);
 
   useEffect(() => {
     if (salesChannel.facebook) {
@@ -46,7 +46,7 @@ function AddChannels({ toggleChannel }) {
         amazon,
       };
       const db = firebase.firestore();
-      db.collection("users")
+      db.collection("shops")
         .doc(userInfo.id)
         .update({
           userSalesChannels,
@@ -80,7 +80,7 @@ function AddChannels({ toggleChannel }) {
         amazon,
       };
       const db = firebase.firestore();
-      db.collection("users")
+      db.collection("shops")
         .doc(userInfo.id)
         .set(
           {

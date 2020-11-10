@@ -25,7 +25,7 @@ function SellItem() {
       let customers = {};
       customers[customerPhone] = { customerName, customerPhone };
       const db = firebase.firestore();
-      db.collection("users")
+      db.collection("shops")
         .doc(userInfo.id)
         .set(
           {
@@ -48,7 +48,7 @@ function SellItem() {
       for (let i = 0; i < userCart.length; i++) {
         products[userCart[i].itemName].quantity -= userCart[i].quantity;
       }
-      db.collection("users")
+      db.collection("shops")
         .doc(userInfo.id)
         .update({
           products,
@@ -73,29 +73,31 @@ function SellItem() {
   return (
     <>
       <div className={styling.SellItem}>
-        <table cellspacing="0">
-          <tr>
-            <th>Customer Name</th>
-            <th>Customer Phone</th>
-          </tr>
-          <tr>
-            <td>
-              <input
-                type="text"
-                placeholder="customer name"
-                value={customerName}
-                onChange={(e) => setCustomerName(e.target.value)}
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                placeholder="customer phone"
-                value={customerPhone}
-                onChange={(e) => setCustomerPhone(e.target.value)}
-              />
-            </td>
-          </tr>
+        <table cellSpacing="0">
+          <thead>
+            <tr>
+              <th>Customer Name</th>
+              <th>Customer Phone</th>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="text"
+                  placeholder="customer name"
+                  value={customerName}
+                  onChange={(e) => setCustomerName(e.target.value)}
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  placeholder="customer phone"
+                  value={customerPhone}
+                  onChange={(e) => setCustomerPhone(e.target.value)}
+                />
+              </td>
+            </tr>
+          </thead>
         </table>
 
         <ProductInput />

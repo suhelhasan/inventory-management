@@ -5,6 +5,7 @@ import Login from "../Components/Login/Login";
 import Dashboard from "../Components/Dashboard/Dashboard";
 import RegisterShop from "../Components/RegisterShop/RegisterShop";
 import NotFound from "../Components/404/NotFound";
+import RegisterOptions from "../Components/RegisterOptions/RegisterOptions";
 
 function Routing() {
   return (
@@ -13,6 +14,7 @@ function Routing() {
       <Route exact path="/signin" component={Login} />
       <Route exact path="/dashboard" component={Dashboard} />
       <Route exact path="/register" component={RegisterShop} />
+      <Route exact path="/registerOptions" component={RegisterOptions} />
       <Route component={NotFound} />
     </Switch>
   );

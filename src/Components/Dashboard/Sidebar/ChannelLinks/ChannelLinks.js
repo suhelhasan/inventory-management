@@ -33,7 +33,6 @@ function ChannelLinks() {
     setUserChannels(selectedChannels);
   }, [channels]);
 
-  console.log(userChannels);
   return (
     <>
       <div className={styling.ChannelLinks}>
@@ -43,6 +42,7 @@ function ChannelLinks() {
             alt={eachChannel[0]}
             target="_blank"
             rel="noopener noreferrer"
+            key={eachChannel[1]}
           >
             <div className={styling.channel}>
               {eachChannel[2]} {eachChannel[0]}

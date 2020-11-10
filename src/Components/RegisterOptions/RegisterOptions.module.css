@@ -1,0 +1,97 @@
+.RegisterOptions {
+  width: 100%;
+  height: 100vh;
+  padding: 0 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #131a35;
+  color: #cecece;
+}
+
+.RegisterOptionsContent {
+  height: 80%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #cecece;
+}
+.RegisterOptionsContent > img {
+  width: 90%;
+}
+
+.RegisterOptionsTextArea {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  color: #e2e2e2;
+}
+.RegisterOptionsTextArea > h2 {
+  padding-bottom: 30px;
+}
+.RegisterOptionsTextArea > h2 > a {
+  color: #e2e2e2;
+  text-decoration: none;
+}
+.RegisterOptionsTextArea > h2 > a:hover {
+  opacity: 0.8;
+}
+.RegisterOptionsTextArea > p {
+  padding-top: 20px;
+  width: 85%;
+}
+.buttonDiv {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 230px;
+  height: 50px;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  cursor: pointer;
+  background-color: #e2e2e2;
+}
+.buttonDiv:hover {
+  opacity: 0.8;
+}
+
+.buttonDiv > p {
+  font-weight: bold;
+  color: #131a35;
+}
+.inputDiv {
+  margin-top: 25px;
+  background-color: #e2e2e2;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.inputDiv > input {
+  font-size: 16px;
+  padding: 5px;
+  width: 200px;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+}
+.inputDiv > input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.inputDiv > button {
+  width: 150px;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.inputDiv > button:focus {
+  outline: none;
+  box-shadow: none;
+}

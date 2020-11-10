@@ -8,13 +8,13 @@ import { BsGraphUp } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 function RegisterShop() {
-  let shopDetails = useSelector((state) => state.user.shopDetails);
+  let shopDetails = useSelector((state) => state.shopDetails);
   let loggedIn = useSelector((state) => state.isLogged);
 
   if (!loggedIn) {
     return <Redirect to="signin" />;
   }
-  if (shopDetails) {
+  if (shopDetails.shopName) {
     return <Redirect to="dashboard" />;
   }
 

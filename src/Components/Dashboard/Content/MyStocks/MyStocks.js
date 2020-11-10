@@ -49,7 +49,7 @@ function MyStocks() {
       let products = { ...allItems };
 
       const db = firebase.firestore();
-      db.collection("users")
+      db.collection("shops")
         .doc(userInfo.id)
         .update({
           products,
@@ -71,37 +71,39 @@ function MyStocks() {
       <div className={styling.MyStocks}>
         {items.length ? (
           <table cellspacing="0">
-            <tr>
-              <th>S. No.</th>
-              <th>Item Name</th>
-              <th>Quantity</th>
-              <th>Cost Price</th>
-              <th>Selling Price</th>
-              <th>Action</th>
-            </tr>
-            {items.map((each, count) => (
+            <thead>
               <tr>
-                <td>{count + 1}</td>
-                <td>{each[0]}</td>
-                <td>
-                  {each[1].quantity} {each[1].measurment}
-                </td>
-                <td>{each[1].costPrice}</td>
-                <td>{each[1].sellingPrice}</td>
-                <td>
-                  <FiEdit2
-                    className={styling.editIcon}
-                    onClick={() => {
-                      toggleEditScreen(each[1]);
-                    }}
-                  />
-                  <AiOutlineDelete
-                    className={styling.deleteIcon}
-                    onClick={() => deleteItem(each[1])}
-                  />
-                </td>
+                <th>S. No.</th>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Cost Price</th>
+                <th>Selling Price</th>
+                <th>Action</th>
               </tr>
-            ))}
+              {items.map((each, count) => (
+                <tr>
+                  <td>{count + 1}</td>
+                  <td>{each[0]}</td>
+                  <td>
+                    {each[1].quantity} {each[1].measurment}
+                  </td>
+                  <td>{each[1].costPrice}</td>
+                  <td>{each[1].sellingPrice}</td>
+                  <td>
+                    <FiEdit2
+                      className={styling.editIcon}
+                      onClick={() => {
+                        toggleEditScreen(each[1]);
+                      }}
+                    />
+                    <AiOutlineDelete
+                      className={styling.deleteIcon}
+                      onClick={() => deleteItem(each[1])}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </thead>
           </table>
         ) : (
           <h2>No Item is added</h2>

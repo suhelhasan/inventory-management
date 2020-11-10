@@ -29,7 +29,7 @@
 .SellItem td:last-child {
   border-right: 1px solid #cfcfcf;
 }
-.SellItem > table > tr > td > input {
+.SellItem > table > thead > tr > td > input {
   width: 70%;
   height: 35px;
   background-color: #e2e2e2;
@@ -38,7 +38,7 @@
   border-radius: 2px;
   font-size: 17px;
 }
-.SellItem > table > tr > td > input:focus {
+.SellItem > table > thead > tr > td > input:focus {
   outline: 1px solid #8f8f8f;
   border-radius: 2px;
 }

@@ -36,7 +36,7 @@ function Customers() {
       delete filteredCustomers[key];
 
       const db = firebase.firestore();
-      db.collection("users")
+      db.collection("shops")
         .doc(userInfo.id)
         .update({
           customers: filteredCustomers,
@@ -57,29 +57,31 @@ function Customers() {
       <div className={styling.Customers}>
         {totalCustomers.length ? (
           <table cellspacing="0">
-            <tr>
-              <th>S. No.</th>
-              <th>Customer Name</th>
-              <th>Phone</th>
-              <th>Action</th>
-            </tr>
-            {totalCustomers.map((customer, index) => (
+            <thead>
               <tr>
-                <td>{index + 1}</td>
-                <td>{customer[1].customerName}</td>
-                <td>{customer[1].customerPhone}</td>
-                <td>
-                  {" "}
-                  <AiOutlineDelete
-                    onClick={(e) => {
-                      e.preventDefault();
-                      removeCustomer(customer);
-                    }}
-                    className={styling.deleteIcon}
-                  />
-                </td>
+                <th>S. No.</th>
+                <th>Customer Name</th>
+                <th>Phone</th>
+                <th>Action</th>
               </tr>
-            ))}
+              {totalCustomers.map((customer, index) => (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{customer[1].customerName}</td>
+                  <td>{customer[1].customerPhone}</td>
+                  <td>
+                    {" "}
+                    <AiOutlineDelete
+                      onClick={(e) => {
+                        e.preventDefault();
+                        removeCustomer(customer);
+                      }}
+                      className={styling.deleteIcon}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </thead>
           </table>
         ) : (
           <h1>NO CUSTOMERS AVAILABLE</h1>

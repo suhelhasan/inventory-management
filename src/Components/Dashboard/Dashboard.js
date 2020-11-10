@@ -19,7 +19,7 @@ import Customers from "./Content/Customers/Customers";
 import AddChannel from "./AddChannels/AddChannels";
 
 function Dashboard() {
-  let shopDetails = useSelector((state) => state.user.shopDetails);
+  let shopDetails = useSelector((state) => state.shopDetails);
   let loggedIn = useSelector((state) => state.isLogged);
 
   let [viewComponent, setViewComponent] = useState(<SellItem />);

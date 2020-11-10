@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styling from "./Registration.module.css";
 import firebase from "../../../firebase/firebase";
 import { useSelector, useDispatch } from "react-redux";
-import { userDetails } from "../../../redux/actions/actions";
+import { shopDetails } from "../../../redux/actions/actions";
 import { notify, ToastContainer } from "../../Notify/Notify";
 
 function Registration() {
@@ -13,23 +13,23 @@ function Registration() {
   let [shopPhone, setShopPhone] = useState("");
   let [shopMail, setShopMail] = useState("");
   let [shopOwnerName, setShopOwnerName] = useState("");
-  let [shopOwnerPhone, setShopOwnerPhone] = useState("");
+  let [shopOwnerPasscode, setShopOwnerPasscode] = useState("");
   let [updateUser, setUpdateUser] = useState(false);
 
-  let userInfo = useSelector((state) => state.user);
+  let ourShop = useSelector((state) => state.shopDetails);
+  let userDetails = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (userInfo.shopDetails) {
-      console.log("ALL DATA", userInfo);
-      setShopName(userInfo.shopDetails.shopName);
-      setShopAddress(userInfo.shopDetails.shopAddress);
-      setShopPhone(userInfo.shopDetails.shopPhone);
-      setShopMail(userInfo.shopDetails.shopMail);
-      setShopOwnerName(userInfo.shopDetails.shopOwnerName);
-      setShopOwnerPhone(userInfo.shopDetails.shopOwnerPhone);
+    if (ourShop.shopName && userDetails) {
+      setShopName(ourShop.shopName);
+      setShopAddress(ourShop.shopAddress);
+      setShopPhone(ourShop.shopPhone);
+      setShopMail(ourShop.shopMail);
+      setShopOwnerName(ourShop.shopOwnerName);
+      setShopOwnerPasscode(ourShop.shopOwnerPasscode);
       setUpdateUser(true);
     }
-  }, [userInfo]);
+  }, [ourShop, userDetails]);
 
   let updateUserProfile = () => {
     if (
@@ -38,24 +38,24 @@ function Registration() {
       shopPhone.length > 3 &&
       shopMail.length > 3 &&
       shopOwnerName.length > 3 &&
-      shopOwnerPhone.length > 3
+      shopOwnerPasscode.length > 3
     ) {
-      let shopDetails = {
+      let myShopDetails = {
         shopName,
         shopAddress,
         shopPhone,
         shopMail,
         shopOwnerName,
-        shopOwnerPhone,
+        shopOwnerPasscode,
       };
       const db = firebase.firestore();
-      db.collection("users")
-        .doc(userInfo.id)
+      db.collection("shops")
+        .doc(userDetails.id)
         .update({
-          shopDetails,
+          shopDetails: myShopDetails,
         })
         .then(() => {
-          dispatch(userDetails({ ...userInfo, shopDetails }));
+          dispatch(shopDetails(myShopDetails));
           notify("success", "Updated data successfully");
           console.log("Update data successfully");
         })
@@ -74,27 +74,27 @@ function Registration() {
       shopPhone.length > 3 &&
       shopMail.length > 3 &&
       shopOwnerName.length > 3 &&
-      shopOwnerPhone.length > 3
+      shopOwnerPasscode.length > 3
     ) {
-      let shopDetails = {
+      let myShopDetails = {
         shopName,
         shopAddress,
         shopPhone,
         shopMail,
         shopOwnerName,
-        shopOwnerPhone,
+        shopOwnerPasscode,
       };
       const db = firebase.firestore();
-      db.collection("users")
-        .doc(userInfo.id)
+      db.collection("shops")
+        .doc(ourShop)
         .set(
           {
-            shopDetails,
+            shopDetails: myShopDetails,
           },
           { merge: true }
         )
         .then(() => {
-          dispatch(userDetails({ ...userInfo, shopDetails }));
+          dispatch(shopDetails(myShopDetails));
           notify("success", "Added data successfully");
           console.log("Added data successfully");
         })
@@ -210,13 +210,13 @@ function Registration() {
               />
             </div>
             <div className={styling.row}>
-              <p>Owner Phone</p>
+              <p>Passcode for employees</p>
               <input
                 ref={inputRef6}
-                type="tel"
-                placeholder="phone"
-                value={shopOwnerPhone}
-                onChange={(e) => setShopOwnerPhone(e.target.value)}
+                type="password"
+                placeholder="passcode"
+                value={shopOwnerPasscode}
+                onChange={(e) => setShopOwnerPasscode(e.target.value)}
               />
             </div>
           </div>

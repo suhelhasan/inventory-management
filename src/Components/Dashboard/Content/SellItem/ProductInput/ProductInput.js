@@ -60,61 +60,63 @@ function ProductInput() {
   };
   return (
     <form className={styling.ProductInput}>
-      <table cellspacing="0">
-        <tr>
-          <th>Product</th>
-          <th>Quantity</th>
-          <th>Measurment</th>
-          <th>Price</th>
-          <th>Action</th>
-        </tr>
-        <tr>
-          <td>
-            {" "}
-            <select
-              value={itemName}
-              onChange={(e) => setItemName(e.target.value)}
-            >
-              <option value="" disabled selected>
-                Select Product
-              </option>
-              {itemsArray.map((eachItem) => (
-                <option value={eachItem[0]} key={eachItem[0]}>
-                  {eachItem[0]}
+      <table cellSpacing="0">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Measurment</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+          <tr>
+            <td>
+              {" "}
+              <select
+                value={itemName}
+                onChange={(e) => setItemName(e.target.value)}
+              >
+                <option value="" disabled defaultValue>
+                  Select Product
                 </option>
-              ))}
-            </select>
-          </td>
-          <td>
-            {" "}
-            <input
-              type="number"
-              value={quantity}
-              list="items"
-              onChange={(e) => setQuantity(e.target.value)}
-            />
-          </td>
-          <td>{measurment ? measurment : "---"}</td>
-          <td>{price ? price : "--"}</td>
-          <td>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                addItem();
-              }}
-            >
-              ADD
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                removeItem();
-              }}
-            >
-              DEL
-            </button>
-          </td>
-        </tr>
+                {itemsArray.map((eachItem) => (
+                  <option value={eachItem[0]} key={eachItem[0]}>
+                    {eachItem[0]}
+                  </option>
+                ))}
+              </select>
+            </td>
+            <td>
+              {" "}
+              <input
+                type="number"
+                value={quantity}
+                list="items"
+                onChange={(e) => setQuantity(e.target.value)}
+              />
+            </td>
+            <td>{measurment ? measurment : "---"}</td>
+            <td>{price ? price : "--"}</td>
+            <td>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  addItem();
+                }}
+              >
+                ADD
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  removeItem();
+                }}
+              >
+                DEL
+              </button>
+            </td>
+          </tr>
+        </thead>
       </table>
     </form>
   );

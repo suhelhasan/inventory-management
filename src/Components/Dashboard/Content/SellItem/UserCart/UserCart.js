@@ -21,31 +21,33 @@ function UserCart() {
       {userCart.length ? (
         <>
           <table className={styling.UserCart} cellspacing="0">
-            <tr>
-              <th>S. No.</th>
-              <th>Item Name</th>
-              <th>Quantity</th>
-              <th>Price/kg</th>
-              <th>Total</th>
-              <th>Action</th>
-            </tr>
-            {userCart.map((each, count) => (
+            <thead>
               <tr>
-                <td>{count + 1}</td>
-                <td>{each.itemName}</td>
-                <td>
-                  {each.quantity} {each.measurment}
-                </td>
-                <td>{each.sellingPrice}</td>
-                <td>{each.price}</td>
-                <td>
-                  <AiOutlineDelete
-                    onClick={() => deleteItem(each)}
-                    className={styling.deleteIcon}
-                  />
-                </td>
+                <th>S. No.</th>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Price/kg</th>
+                <th>Total</th>
+                <th>Action</th>
               </tr>
-            ))}
+              {userCart.map((each, count) => (
+                <tr>
+                  <td>{count + 1}</td>
+                  <td>{each.itemName}</td>
+                  <td>
+                    {each.quantity} {each.measurment}
+                  </td>
+                  <td>{each.sellingPrice}</td>
+                  <td>{each.price}</td>
+                  <td>
+                    <AiOutlineDelete
+                      onClick={() => deleteItem(each)}
+                      className={styling.deleteIcon}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </thead>
           </table>
         </>
       ) : null}

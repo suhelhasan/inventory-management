@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styling from "./Registration.module.css";
 import firebase from "../../../firebase/firebase";
 import { useSelector, useDispatch } from "react-redux";
-import { shopDetails } from "../../../redux/actions/actions";
+import { shopDetails, userDetails } from "../../../redux/actions/actions";
 import { notify, ToastContainer } from "../../Notify/Notify";
 
 function Registration() {
@@ -17,10 +17,13 @@ function Registration() {
   let [updateUser, setUpdateUser] = useState(false);
 
   let ourShop = useSelector((state) => state.shopDetails);
-  let userDetails = useSelector((state) => state.user);
+  let userDetailsLocal = useSelector((state) => state.user);
 
+  console.log(ourShop);
+  console.log(userDetailsLocal);
   useEffect(() => {
-    if (ourShop.shopName && userDetails) {
+    if (ourShop.shopName && userDetailsLocal) {
+      // alert("hello");
       setShopName(ourShop.shopName);
       setShopAddress(ourShop.shopAddress);
       setShopPhone(ourShop.shopPhone);
@@ -29,7 +32,7 @@ function Registration() {
       setShopOwnerPasscode(ourShop.shopOwnerPasscode);
       setUpdateUser(true);
     }
-  }, [ourShop, userDetails]);
+  }, [ourShop, userDetailsLocal]);
 
   let updateUserProfile = () => {
     if (
@@ -50,7 +53,7 @@ function Registration() {
       };
       const db = firebase.firestore();
       db.collection("shops")
-        .doc(userDetails.id)
+        .doc(ourShop.shopName)
         .update({
           shopDetails: myShopDetails,
         })
@@ -86,7 +89,7 @@ function Registration() {
       };
       const db = firebase.firestore();
       db.collection("shops")
-        .doc(ourShop)
+        .doc(myShopDetails.shopName)
         .set(
           {
             shopDetails: myShopDetails,
@@ -96,6 +99,24 @@ function Registration() {
         .then(() => {
           dispatch(shopDetails(myShopDetails));
           notify("success", "Added data successfully");
+          console.log("Added data successfully");
+        })
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
+
+      db.collection("users")
+        .doc(userDetailsLocal.id)
+        .update({
+          ...userDetailsLocal,
+          shopOwnerPasscode,
+          shopName,
+        })
+        .then(() => {
+          dispatch(
+            userDetails({ ...userDetailsLocal, shopOwnerPasscode, shopName })
+          );
+          notify("success", "Passcode added successfully");
           console.log("Added data successfully");
         })
         .catch((error) => {

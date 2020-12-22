@@ -46,9 +46,10 @@ function AddItem() {
       let products = {};
       products[itemName] = itemDetails;
 
+      // alert(userInfo.shopName);
       const db = firebase.firestore();
       db.collection("shops")
-        .doc(userInfo.id)
+        .doc(userInfo.shopName)
         .set(
           {
             products,

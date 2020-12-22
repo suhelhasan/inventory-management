@@ -46,7 +46,7 @@ function EditMyStock({ toggleEditScreen, itemDetails }) {
 
       const db = firebase.firestore();
       db.collection("shops")
-        .doc(userInfo.id)
+        .doc(userInfo.shopName)
         .update({
           [`products.${itemName}`]: itemDetails,
         })

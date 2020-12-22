@@ -47,7 +47,7 @@ function AddChannels({ toggleChannel }) {
       };
       const db = firebase.firestore();
       db.collection("shops")
-        .doc(userInfo.id)
+        .doc(userInfo.shopName)
         .update({
           userSalesChannels,
         })
@@ -81,7 +81,7 @@ function AddChannels({ toggleChannel }) {
       };
       const db = firebase.firestore();
       db.collection("shops")
-        .doc(userInfo.id)
+        .doc(userInfo.shopName)
         .set(
           {
             userSalesChannels,

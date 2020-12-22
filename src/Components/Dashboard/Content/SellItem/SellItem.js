@@ -26,7 +26,7 @@ function SellItem() {
       customers[customerPhone] = { customerName, customerPhone };
       const db = firebase.firestore();
       db.collection("shops")
-        .doc(userInfo.id)
+        .doc(userInfo.shopName)
         .set(
           {
             customers,
@@ -49,7 +49,7 @@ function SellItem() {
         products[userCart[i].itemName].quantity -= userCart[i].quantity;
       }
       db.collection("shops")
-        .doc(userInfo.id)
+        .doc(userInfo.shopName)
         .update({
           products,
         })

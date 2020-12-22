@@ -37,13 +37,12 @@ function Customers() {
 
       const db = firebase.firestore();
       db.collection("shops")
-        .doc(userInfo.id)
+        .doc(userInfo.shopName)
         .update({
           customers: filteredCustomers,
         })
         .then(() => {
           notify("error", "Deleted customer successfully");
-
           dispatch(deleteCustomer(filteredCustomers));
         })
         .catch((error) => {

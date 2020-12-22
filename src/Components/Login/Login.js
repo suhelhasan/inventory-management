@@ -10,7 +10,7 @@ import loginImage from "../../assets/signInPage.svg";
 function Login() {
   let isLogged = useSelector((state) => state.isLogged);
   let shopDetails = useSelector((state) => state.shopDetails);
-  // console.log("SHOP DETAILS", shopDetails.shopName);
+  // console.log("SHOP DETAILS", shopDetails);
   if (isLogged && shopDetails.shopName) {
     return <Redirect to="/dashboard" />;
   } else if (isLogged && !shopDetails.shopName) {

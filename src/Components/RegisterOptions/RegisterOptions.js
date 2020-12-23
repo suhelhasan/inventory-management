@@ -1,38 +1,92 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styling from "./RegisterOptions.module.css";
 import image from "../../assets/RegisterOptions1.svg";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import firebase from "../../firebase/firebase";
 import { notify, ToastContainer } from "../Notify/Notify";
+import {
+  isLoggedIn,
+  userDetails,
+  salesChannelAction,
+  salesItem,
+  allCustomers,
+  shopDetails,
+} from "../../redux/actions/actions";
 
 function RegisterOptions() {
   let [passcode, setPasscode] = useState("");
-  let shopDetails = useSelector((state) => state.shopDetails);
+  let shopDetailsLocal = useSelector((state) => state.shopDetails);
   let loggedIn = useSelector((state) => state.isLogged);
+  let userDetailsLocal = useSelector((state) => state.user);
+
   let dispatch = useDispatch();
 
+  let [shops, setShops] = useState([]);
+  let [shopName, setShopName] = useState([]);
+  useEffect(() => {
+    // GET ALL SHOPS NAME
+    const db = firebase.firestore();
+    db.collection("shops")
+      .get()
+      .then((da) => {
+        let ans = da.docs.map((doc) => {
+          return `${doc.data().shopDetails.shopName}, ${
+            doc.data().shopDetails.shopPhone
+          }`;
+        });
+        setShops(ans);
+      });
+  }, []);
+
   if (!loggedIn) {
-    // return <Redirect to="signin" />;
+    return <Redirect to="signin" />;
   }
-  if (shopDetails) {
+  console.log("SHOP DETAILS LOCAL", shopDetailsLocal);
+
+  if (shopDetailsLocal) {
     // return <Redirect to="dashboard" />;
   }
   let checkPasscode = () => {
-    // const db = firebase.firestore();
-    // db.collection("shops")
-    //   .doc(shopDetails.shopName)
-    //   .get()
-    //   .then((doc) => {
-    //     if (doc.data().passcode === passcode) {
-    //       notify("success", "user login successfully");
-    //       console.log("LOGIN SUCCES AS A EMPLOYEE");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error adding document: ", error);
-    //   });
-    console.log(shopDetails);
+    // CHECKING PASSCODE
+    const db = firebase.firestore();
+    db.collection("shops")
+      .doc(shopName)
+      .get()
+      .then((doc) => {
+        if (doc.data().shopDetails.shopOwnerPasscode === passcode) {
+          notify("success", "user login successfully");
+          console.log("LOGIN SUCCES AS A EMPLOYEE");
+          // dispatch(userDetails());
+          dispatch(shopDetails(doc.data().shopDetails));
+          dispatch(salesChannelAction(doc.data().userSalesChannels));
+          dispatch(salesItem(doc.data().products));
+          dispatch(allCustomers(doc.data().customers));
+        } else {
+          console.log("fail");
+        }
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+    // UPDATE USER STATUS
+    db.collection("users")
+      .doc(userDetailsLocal.id)
+      .update({
+        ...userDetailsLocal,
+        status: "employee",
+      })
+      .then(() => {
+        dispatch(
+          userDetails({
+            ...userDetailsLocal,
+            status: "employee",
+          })
+        );
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
   };
 
   return (
@@ -54,6 +108,21 @@ function RegisterOptions() {
 
           <p>Or</p>
           <div className={styling.inputDiv}>
+            {/* select data */}
+            <select
+              value={shopName}
+              onChange={(e) => setShopName(e.target.value)}
+            >
+              <option value="" disabled defaultValue>
+                Select Product
+              </option>
+              {shops.map((eachItem) => (
+                <option value={eachItem.split(",")[0]} key={eachItem[0]}>
+                  {eachItem}
+                </option>
+              ))}
+            </select>
+
             <input
               type="text"
               value={passcode}

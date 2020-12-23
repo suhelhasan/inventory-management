@@ -23,17 +23,6 @@ function App() {
         dispatch(isLoggedIn());
         const db = firebase.firestore();
 
-        // GET ALL SHOPS NAME
-        db.collection("shops")
-          .get()
-          .then((da) => {
-            // console.log(da.docs);
-            let ans = da.docs.map((doc) => {
-              return doc.data().shopDetails.shopName;
-            });
-            console.log(ans);
-          });
-
         db.collection("users")
           .doc(uid)
           .get()
@@ -47,7 +36,6 @@ function App() {
                 .then((doc) => {
                   if (doc.exists) {
                     dispatch(shopDetails(doc.data().shopDetails));
-                    // console.log("DOC DATA", doc.data());
                     dispatch(salesChannelAction(doc.data().userSalesChannels));
                     dispatch(salesItem(doc.data().products));
                     dispatch(allCustomers(doc.data().customers));

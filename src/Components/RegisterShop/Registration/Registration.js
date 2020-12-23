@@ -111,10 +111,16 @@ function Registration() {
           ...userDetailsLocal,
           shopOwnerPasscode,
           shopName,
+          status: "admin",
         })
         .then(() => {
           dispatch(
-            userDetails({ ...userDetailsLocal, shopOwnerPasscode, shopName })
+            userDetails({
+              ...userDetailsLocal,
+              shopOwnerPasscode,
+              shopName,
+              status: "admin",
+            })
           );
           notify("success", "Passcode added successfully");
           console.log("Added data successfully");

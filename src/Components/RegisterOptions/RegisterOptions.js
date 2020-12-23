@@ -16,14 +16,14 @@ import {
 
 function RegisterOptions() {
   let [passcode, setPasscode] = useState("");
-  let shopDetailsLocal = useSelector((state) => state.shopDetails);
+  let [shops, setShops] = useState([]);
+  let [shopName, setShopName] = useState([]);
+  // let shopDetailsLocal = useSelector((state) => state.shopDetails);
   let loggedIn = useSelector((state) => state.isLogged);
   let userDetailsLocal = useSelector((state) => state.user);
 
   let dispatch = useDispatch();
 
-  let [shops, setShops] = useState([]);
-  let [shopName, setShopName] = useState([]);
   useEffect(() => {
     // GET ALL SHOPS NAME
     const db = firebase.firestore();
@@ -42,11 +42,7 @@ function RegisterOptions() {
   if (!loggedIn) {
     return <Redirect to="signin" />;
   }
-  console.log("SHOP DETAILS LOCAL", shopDetailsLocal);
 
-  if (shopDetailsLocal) {
-    // return <Redirect to="dashboard" />;
-  }
   let checkPasscode = () => {
     // CHECKING PASSCODE
     const db = firebase.firestore();

@@ -29,18 +29,21 @@ function RegisterOptions() {
     const db = firebase.firestore();
     db.collection("shops")
       .get()
-      .then((da) => {
-        let ans = da.docs.map((doc) => {
+      .then((res) => {
+        let ans = res.docs.map((doc) => {
           return `${doc.data().shopDetails.shopName}, ${
             doc.data().shopDetails.shopPhone
           }`;
         });
         setShops(ans);
+      })
+      .catch((err) => {
+        alert("ERROR");
       });
   }, []);
 
   if (!loggedIn) {
-    return <Redirect to="signin" />;
+    // return <Redirect to="signin" />;
   }
 
   let checkPasscode = () => {
@@ -71,12 +74,14 @@ function RegisterOptions() {
       .update({
         ...userDetailsLocal,
         status: "employee",
+        shopName,
       })
       .then(() => {
         dispatch(
           userDetails({
             ...userDetailsLocal,
             status: "employee",
+            shopName,
           })
         );
       })

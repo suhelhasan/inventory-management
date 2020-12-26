@@ -10,8 +10,11 @@ import { Link } from "react-router-dom";
 import { MdAdd } from "react-icons/md";
 import ChannelLinks from "./ChannelLinks/ChannelLinks";
 import { FiUsers } from "react-icons/fi";
+import { useSelector, useDispatch } from "react-redux";
 
 function Sidebar({ toggleComponent, activeStatus, showAddChannel }) {
+  let userDetails = useSelector((state) => state.user);
+
   return (
     <div className={styling.Sidebar}>
       <div className={styling.productName}>
@@ -32,12 +35,15 @@ function Sidebar({ toggleComponent, activeStatus, showAddChannel }) {
         >
           <BiRupee className={styling.sidebarIcons} /> Sell Item
         </div>
-        <div
-          onClick={() => toggleComponent("AddItem")}
-          className={activeStatus === "AddItem" ? styling.activeClass : null}
-        >
-          <BiCart className={styling.sidebarIcons} /> Add Items
-        </div>
+        {userDetails.status === "admin" ? (
+          <div
+            onClick={() => toggleComponent("AddItem")}
+            className={activeStatus === "AddItem" ? styling.activeClass : null}
+          >
+            <BiCart className={styling.sidebarIcons} /> Add Items
+          </div>
+        ) : null}
+
         <div
           onClick={() => toggleComponent("MyStocks")}
           className={activeStatus === "MyStocks" ? styling.activeClass : null}
@@ -50,16 +56,17 @@ function Sidebar({ toggleComponent, activeStatus, showAddChannel }) {
         >
           <FiUsers className={styling.sidebarIcons} /> Customers
         </div>
-
-        <div
-          onClick={() => toggleComponent("Registration")}
-          className={
-            activeStatus === "Registration" ? styling.activeClass : null
-          }
-        >
-          <BsBuilding className={styling.sidebarIcons} />
-          Update Details
-        </div>
+        {userDetails.status === "admin" ? (
+          <div
+            onClick={() => toggleComponent("Registration")}
+            className={
+              activeStatus === "Registration" ? styling.activeClass : null
+            }
+          >
+            <BsBuilding className={styling.sidebarIcons} />
+            Update Details
+          </div>
+        ) : null}
       </div>
       <div className={styling.salesChannel}>
         <p>Sales Channel</p>
@@ -67,10 +74,14 @@ function Sidebar({ toggleComponent, activeStatus, showAddChannel }) {
           <ChannelLinks />
         </div>
       </div>
-
-      <div className={styling.AddSalesChannel} onClick={() => showAddChannel()}>
-        <MdAdd className={styling.sidebarIcons} /> Add Channel
-      </div>
+      {userDetails.status === "admin" ? (
+        <div
+          className={styling.AddSalesChannel}
+          onClick={() => showAddChannel()}
+        >
+          <MdAdd className={styling.sidebarIcons} /> Add Channel
+        </div>
+      ) : null}
     </div>
   );
 }

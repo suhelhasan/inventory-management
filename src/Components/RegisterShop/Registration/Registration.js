@@ -18,12 +18,15 @@ function Registration() {
 
   let ourShop = useSelector((state) => state.shopDetails);
   let userDetailsLocal = useSelector((state) => state.user);
+  let salesChannel = useSelector((state) => state.salesChannel);
+  let salesItem = useSelector((state) => state.salesItem);
+  let customers = useSelector((state) => state.customers);
+  // let shopDetailsLocal = useSelector((state) => state.shopDetails);
 
   console.log(ourShop);
   console.log(userDetailsLocal);
   useEffect(() => {
     if (ourShop.shopName && userDetailsLocal) {
-      // alert("hello");
       setShopName(ourShop.shopName);
       setShopAddress(ourShop.shopAddress);
       setShopPhone(ourShop.shopPhone);
@@ -51,14 +54,70 @@ function Registration() {
         shopOwnerName,
         shopOwnerPasscode,
       };
+
+      if (ourShop.shopName !== shopName) {
+        const db = firebase.firestore();
+        db.collection("shops")
+          .doc(ourShop.shopName)
+          .delete()
+          .then(() => {
+            // creating new data
+            const db = firebase.firestore();
+            db.collection("shops")
+              .doc(shopName)
+              .set(
+                {
+                  shopDetails: myShopDetails,
+                  customers: customers,
+                  products: salesItem,
+                  userSalesChannels: salesChannel,
+                },
+                { merge: true }
+              )
+              .then(() => {
+                dispatch(shopDetails(myShopDetails));
+                notify("success", "Updated data successfully");
+                console.log("Update data successfully");
+              })
+              .catch((error) => {
+                console.error("Error adding document: ", error);
+              });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        alert("Name is changing");
+      } else {
+        const db = firebase.firestore();
+        db.collection("shops")
+          .doc(shopName)
+          .update({
+            shopDetails: myShopDetails,
+          })
+          .then(() => {
+            dispatch(shopDetails(myShopDetails));
+            notify("success", "Updated data successfully");
+            console.log("Update data successfully");
+          })
+          .catch((error) => {
+            console.error("Error adding document: ", error);
+          });
+      }
+
+      // UPDATE PROFILE PASSWORD
       const db = firebase.firestore();
-      db.collection("shops")
-        .doc(ourShop.shopName)
-        .update({
-          shopDetails: myShopDetails,
-        })
+
+      db.collection("users")
+        .doc(userDetailsLocal.id)
+        .update({ ...userDetailsLocal, shopOwnerPasscode, shopName })
         .then(() => {
-          dispatch(shopDetails(myShopDetails));
+          dispatch(
+            userDetails({
+              ...userDetailsLocal,
+              shopOwnerPasscode,
+              shopName,
+            })
+          );
           notify("success", "Updated data successfully");
           console.log("Update data successfully");
         })

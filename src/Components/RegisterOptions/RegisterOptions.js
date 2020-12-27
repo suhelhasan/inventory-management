@@ -17,8 +17,8 @@ import {
 function RegisterOptions() {
   let [passcode, setPasscode] = useState("");
   let [shops, setShops] = useState([]);
-  let [shopName, setShopName] = useState([]);
-  // let shopDetailsLocal = useSelector((state) => state.shopDetails);
+  let [shopName, setShopName] = useState("");
+  let shopDetailsLocal = useSelector((state) => state.shopDetails);
   let loggedIn = useSelector((state) => state.isLogged);
   let userDetailsLocal = useSelector((state) => state.user);
 
@@ -43,51 +43,57 @@ function RegisterOptions() {
   }, []);
 
   if (!loggedIn) {
-    // return <Redirect to="signin" />;
+    return <Redirect to="signin" />;
+  } else if (Object.keys(shopDetailsLocal).length != 0) {
+    return <Redirect to="/dashboard" />;
   }
 
   let checkPasscode = () => {
-    // CHECKING PASSCODE
-    const db = firebase.firestore();
-    db.collection("shops")
-      .doc(shopName)
-      .get()
-      .then((doc) => {
-        if (doc.data().shopDetails.shopOwnerPasscode === passcode) {
-          notify("success", "user login successfully");
-          console.log("LOGIN SUCCES AS A EMPLOYEE");
-          // dispatch(userDetails());
-          dispatch(shopDetails(doc.data().shopDetails));
-          dispatch(salesChannelAction(doc.data().userSalesChannels));
-          dispatch(salesItem(doc.data().products));
-          dispatch(allCustomers(doc.data().customers));
-        } else {
-          console.log("fail");
-        }
-      })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-      });
-    // UPDATE USER STATUS
-    db.collection("users")
-      .doc(userDetailsLocal.id)
-      .update({
-        ...userDetailsLocal,
-        status: "employee",
-        shopName,
-      })
-      .then(() => {
-        dispatch(
-          userDetails({
-            ...userDetailsLocal,
-            status: "employee",
-            shopName,
-          })
-        );
-      })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-      });
+    if (shopName && passcode) {
+      // CHECKING PASSCODE
+      const db = firebase.firestore();
+      db.collection("shops")
+        .doc(shopName)
+        .get()
+        .then((doc) => {
+          if (doc.data().shopDetails.shopOwnerPasscode === passcode) {
+            notify("success", "user login successfully");
+            console.log("LOGIN SUCCES AS A EMPLOYEE");
+            // dispatch(userDetails());
+            dispatch(shopDetails(doc.data().shopDetails));
+            dispatch(salesChannelAction(doc.data().userSalesChannels));
+            dispatch(salesItem(doc.data().products));
+            dispatch(allCustomers(doc.data().customers));
+          } else {
+            console.log("fail");
+          }
+        })
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
+      // UPDATE USER STATUS
+      db.collection("users")
+        .doc(userDetailsLocal.id)
+        .update({
+          ...userDetailsLocal,
+          status: "employee",
+          shopName,
+        })
+        .then(() => {
+          dispatch(
+            userDetails({
+              ...userDetailsLocal,
+              status: "employee",
+              shopName,
+            })
+          );
+        })
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
+    } else {
+      notify("error", "Please select shop name and enter passcode");
+    }
   };
 
   return (
@@ -115,7 +121,7 @@ function RegisterOptions() {
               onChange={(e) => setShopName(e.target.value)}
             >
               <option value="" disabled defaultValue>
-                Select Product
+                Select Shop
               </option>
               {shops.map((eachItem) => (
                 <option value={eachItem.split(",")[0]} key={eachItem[0]}>

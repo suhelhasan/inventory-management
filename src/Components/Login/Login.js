@@ -14,7 +14,7 @@ function Login() {
   if (isLogged && shopDetails.shopName) {
     return <Redirect to="/dashboard" />;
   } else if (isLogged && !shopDetails.shopName) {
-    return <Redirect to="/register" />;
+    return <Redirect to="/registerOptions" />;
   }
 
   let loginWithGoogle = () => {

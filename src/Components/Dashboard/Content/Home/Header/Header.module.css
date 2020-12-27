@@ -1,0 +1,26 @@
+.Header {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  background-color: #d8d7d7;
+  padding: 0 20px;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+.HeaderText {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.HeaderImage {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.HeaderImage > img {
+  height: 85%;
+}

@@ -22,15 +22,16 @@ function Dashboard() {
   let shopDetails = useSelector((state) => state.shopDetails);
   let loggedIn = useSelector((state) => state.isLogged);
 
-  let [viewComponent, setViewComponent] = useState(<SellItem />);
-  let [activeStatus, setActiveStatus] = useState("SellItem");
+  let [viewComponent, setViewComponent] = useState(<Home />);
+  let [activeStatus, setActiveStatus] = useState("Home");
   let [showSidebar, setShowSidebar] = useState(true);
   let [showAddChannel, setShowAddChannel] = useState(false);
 
   if (!loggedIn) {
     return <Redirect to="/signin" />;
-  } else if (!shopDetails) {
-    return <Redirect to="/register" />;
+  }
+  if (Object.keys(shopDetails).length == 0) {
+    return <Redirect to="/registerOptions" />;
   }
 
   let toggleSidebar = () => {

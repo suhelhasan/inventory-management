@@ -61,23 +61,25 @@ function Customers() {
                 <th>S. No.</th>
                 <th>Customer Name</th>
                 <th>Phone</th>
-                <th>Action</th>
+                {userInfo.status === "admin" ? <th>Action</th> : null}
               </tr>
               {totalCustomers.map((customer, index) => (
                 <tr>
                   <td>{index + 1}</td>
                   <td>{customer[1].customerName}</td>
                   <td>{customer[1].customerPhone}</td>
-                  <td>
-                    {" "}
-                    <AiOutlineDelete
-                      onClick={(e) => {
-                        e.preventDefault();
-                        removeCustomer(customer);
-                      }}
-                      className={styling.deleteIcon}
-                    />
-                  </td>
+                  {userInfo.status === "admin" ? (
+                    <td>
+                      {" "}
+                      <AiOutlineDelete
+                        onClick={(e) => {
+                          e.preventDefault();
+                          removeCustomer(customer);
+                        }}
+                        className={styling.deleteIcon}
+                      />
+                    </td>
+                  ) : null}
                 </tr>
               ))}
             </thead>

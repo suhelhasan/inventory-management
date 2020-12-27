@@ -78,7 +78,7 @@ function MyStocks() {
                 <th>Quantity</th>
                 <th>Cost Price</th>
                 <th>Selling Price</th>
-                <th>Action</th>
+                {userInfo.status === "admin" ? <th>Action</th> : null}
               </tr>
               {items.map((each, count) => (
                 <tr>
@@ -89,18 +89,20 @@ function MyStocks() {
                   </td>
                   <td>{each[1].costPrice}</td>
                   <td>{each[1].sellingPrice}</td>
-                  <td>
-                    <FiEdit2
-                      className={styling.editIcon}
-                      onClick={() => {
-                        toggleEditScreen(each[1]);
-                      }}
-                    />
-                    <AiOutlineDelete
-                      className={styling.deleteIcon}
-                      onClick={() => deleteItem(each[1])}
-                    />
-                  </td>
+                  {userInfo.status === "admin" ? (
+                    <td>
+                      <FiEdit2
+                        className={styling.editIcon}
+                        onClick={() => {
+                          toggleEditScreen(each[1]);
+                        }}
+                      />
+                      <AiOutlineDelete
+                        className={styling.deleteIcon}
+                        onClick={() => deleteItem(each[1])}
+                      />
+                    </td>
+                  ) : null}
                 </tr>
               ))}
             </thead>

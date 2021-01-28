@@ -65,6 +65,40 @@ function SellItem() {
           notify("error", "error updating stocks");
           console.error("Error adding document: ", error);
         });
+
+      // let updateSellingHistory = () => {
+      var today = new Date();
+      let date =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate();
+
+      let todaysSell = {};
+      todaysSell[today] = userCart;
+      let sellingHistory = {};
+      sellingHistory[date] = { ...todaysSell };
+      // putMyData[today] = userCart;
+
+      db.collection("shops")
+        .doc(userInfo.shopName)
+        .set(
+          {
+            sellingHistory,
+          },
+          { merge: true }
+        )
+        .then(() => {
+          notify("success", "Added");
+        })
+        .catch((error) => {
+          notify("error", "Customer not added");
+          console.error("Error adding document: ", error);
+        });
+
+      //
+      // };
     } else {
       notify("error", "Enter valid user name and phone number");
     }

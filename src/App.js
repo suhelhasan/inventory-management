@@ -29,23 +29,28 @@ function App() {
           .then((doc) => {
             if (doc.exists) {
               dispatch(userDetails(doc.data()));
-              // updating shop data
-              db.collection("shops")
-                .doc(doc.data().shopName)
-                .get()
-                .then((doc) => {
-                  if (doc.exists) {
-                    dispatch(shopDetails(doc.data().shopDetails));
-                    dispatch(salesChannelAction(doc.data().userSalesChannels));
-                    dispatch(salesItem(doc.data().products));
-                    dispatch(allCustomers(doc.data().customers));
-                  } else {
-                    console.log("No such document!");
-                  }
-                })
-                .catch(function (error) {
-                  console.log("Error getting document:", error);
-                });
+
+              if (doc.data().status === "admin") {
+                // updating shop data
+                db.collection("shops")
+                  .doc(doc.data().shopName)
+                  .get()
+                  .then((doc) => {
+                    if (doc.exists) {
+                      dispatch(shopDetails(doc.data().shopDetails));
+                      dispatch(
+                        salesChannelAction(doc.data().userSalesChannels)
+                      );
+                      dispatch(salesItem(doc.data().products));
+                      dispatch(allCustomers(doc.data().customers));
+                    } else {
+                      console.log("No such document!");
+                    }
+                  })
+                  .catch(function (error) {
+                    console.log("Error getting document:", error);
+                  });
+              }
             } else {
               let id = uid;
               let name = displayName;

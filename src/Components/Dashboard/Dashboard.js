@@ -30,7 +30,8 @@ function Dashboard() {
   if (!loggedIn) {
     return <Redirect to="/signin" />;
   }
-  if (Object.keys(shopDetails).length == 0) {
+  if (Object.keys(shopDetails).length === 0) {
+    // console.log();
     return <Redirect to="/registerOptions" />;
   }
 

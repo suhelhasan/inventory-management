@@ -1,47 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styling from "./Home.module.css";
-import { Line, Bar } from "react-chartjs-2";
-import { useSelector, useDispatch } from "react-redux";
+import Stock from "./Graphs/Stock/Stock";
 // import {  } from "../../../../redux/actions/actions";
 import Header from "./Header/Header";
 
 function Home() {
-  let salesItem = useSelector((state) => state.salesItem);
-
-  let [totalItems, setTotalItems] = useState([]);
-  let [totalItemsValue, setTotalItemsValue] = useState([]);
-
-  useEffect(() => {
-    if (Object.keys(salesItem).length) {
-      setTotalItems(Object.keys(salesItem));
-      let itemsQuantity = Object.values(salesItem).map((item) => item.quantity);
-      setTotalItemsValue(itemsQuantity);
-      console.log(itemsQuantity);
-    }
-  }, [salesItem]);
-
-  console.log("ITEMS", totalItems);
   return (
     <div className={styling.Home}>
       <Header />
-      <div className={styling.bar}>
-        <Bar
-          data={{
-            labels: totalItems,
-            data: totalItemsValue,
-            datasets: [
-              {
-                label: "Quantity",
-                backgroundColor: "#5f6dda",
-                data: totalItemsValue,
-              },
-            ],
-          }}
-          options={{
-            legend: { display: false },
-            title: { display: true, text: `Current Stock` },
-          }}
-        />
+      <div className={styling.bars}>
+        <Stock />
       </div>
     </div>
   );

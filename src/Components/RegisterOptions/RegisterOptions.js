@@ -26,6 +26,7 @@ function RegisterOptions() {
 
   useEffect(() => {
     // GET ALL SHOPS NAME
+
     const db = firebase.firestore();
     db.collection("shops")
       .get()
@@ -42,12 +43,17 @@ function RegisterOptions() {
       });
   }, []);
 
+  // useEffect(() => {
+  //   if (userDetailsLocal.shopName) {
+  //     setShopName(userDetailsLocal.shopName);
+  //   }
+  // }, [userDetailsLocal]);
+
   if (!loggedIn) {
     return <Redirect to="signin" />;
   } else if (Object.keys(shopDetailsLocal).length != 0) {
     return <Redirect to="/dashboard" />;
   }
-
   let checkPasscode = () => {
     if (shopName && passcode) {
       // CHECKING PASSCODE

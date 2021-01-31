@@ -50,6 +50,39 @@ function App() {
                   .catch(function (error) {
                     console.log("Error getting document:", error);
                   });
+              } else if (doc.data().status === "employee") {
+                //
+                let EmployeeShopName = doc.data().shopName;
+                let EmployeePasscode = doc.data().passcode;
+
+                db.collection("shops")
+                  .doc(EmployeeShopName)
+                  .get()
+                  .then((doc) => {
+                    if (doc.exists) {
+                      if (
+                        doc.data().shopDetails.shopOwnerPasscode ===
+                        EmployeePasscode
+                      ) {
+                        // notify("success", "Employee login successfully");
+                        // console.log("LOGIN SUCCES AS A EMPLOYEE");
+                        // dispatch(userDetails());
+                        dispatch(shopDetails(doc.data().shopDetails));
+                        dispatch(
+                          salesChannelAction(doc.data().userSalesChannels)
+                        );
+                        dispatch(salesItem(doc.data().products));
+                        dispatch(allCustomers(doc.data().customers));
+
+                        console.log(
+                          "SHOP SALES HISTORY",
+                          doc.data().sellingHistory
+                        );
+                      }
+                    }
+                  })
+                  .catch((err) => console.log(err));
+                //
               }
             } else {
               let id = uid;

@@ -60,3 +60,9 @@ export const deleteCustomer = (details) => {
     payload: details,
   };
 };
+export const sellingHistory = (details) => {
+  return {
+    type: "SALES_HISTORY",
+    payload: details,
+  };
+};

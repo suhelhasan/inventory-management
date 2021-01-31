@@ -28,7 +28,7 @@ function Dashboard() {
   let [showAddChannel, setShowAddChannel] = useState(false);
 
   if (!loggedIn) {
-    return <Redirect to="/signin" />;
+    // return <Redirect to="/signin" />;
   }
   if (Object.keys(shopDetails).length === 0) {
     // console.log();

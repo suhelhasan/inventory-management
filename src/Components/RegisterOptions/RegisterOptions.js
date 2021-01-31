@@ -84,6 +84,7 @@ function RegisterOptions() {
           ...userDetailsLocal,
           status: "employee",
           shopName,
+          passcode,
         })
         .then(() => {
           dispatch(
@@ -91,6 +92,7 @@ function RegisterOptions() {
               ...userDetailsLocal,
               status: "employee",
               shopName,
+              passcode,
             })
           );
         })

@@ -41,7 +41,7 @@ function ProductInput() {
   let addItem = () => {
     let item = {
       itemName,
-      quantity,
+      quantity: parseInt(quantity),
       measurment,
       price,
       sellingPrice: allItems[itemName].sellingPrice,

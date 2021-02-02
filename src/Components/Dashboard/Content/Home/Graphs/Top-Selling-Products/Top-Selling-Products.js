@@ -1,22 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Line, Bar } from "react-chartjs-2";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import styling from "./Top-Selling-Products.module.css";
 
 export default function TopSellingProducts() {
-  let salesItem = useSelector((state) => state.salesItem);
-
+  let entireHistory = useSelector((state) => state.salesHistory);
   let [totalItems, setTotalItems] = useState([]);
   let [totalItemsValue, setTotalItemsValue] = useState([]);
 
   useEffect(() => {
-    if (Object.keys(salesItem).length) {
-      setTotalItems(Object.keys(salesItem));
-      let itemsQuantity = Object.values(salesItem).map((item) => item.quantity);
-      setTotalItemsValue(itemsQuantity);
-      console.log(itemsQuantity);
+    if (Object.keys(entireHistory).length) {
+      let all = {};
+      for (let oneDay in entireHistory) {
+        for (let eachSell in entireHistory[oneDay]) {
+          // console.log(entireHistory[oneDay][eachSell]);
+          for (let i = 0; i < entireHistory[oneDay][eachSell].length; i++) {
+            let itemName = entireHistory[oneDay][eachSell][i].itemName;
+            all[itemName] = all[itemName]
+              ? all[itemName] + entireHistory[oneDay][eachSell][i].quantity
+              : entireHistory[oneDay][eachSell][i].quantity;
+          }
+        }
+      }
+      setTotalItems(Object.keys(all));
+      setTotalItemsValue(Object.values(all));
     }
-  }, [salesItem]);
+  }, [entireHistory]);
+
   return (
     <div className={styling.bar}>
       <Bar

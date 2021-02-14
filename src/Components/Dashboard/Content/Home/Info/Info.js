@@ -5,7 +5,7 @@ import Stock from "../Graphs/Stock/Stock";
 import { useSelector, useDispatch } from "react-redux";
 import { Line } from "react-chartjs-2";
 import { MdFavoriteBorder } from "react-icons/md";
-import { BiCart, BiRupee } from "react-icons/bi";
+import { BiCart } from "react-icons/bi";
 import { AiOutlineStock } from "react-icons/ai";
 import { salesRecord } from "../../../../../redux/actions/actions";
 
@@ -16,9 +16,9 @@ export default function Info() {
   let [lastMonthSell, setLastMonthSell] = useState(0);
   let [oneDayVisits, setOneDayVisits] = useState(0);
   let [monthlyVisits, setMonthlyVisits] = useState(0);
-  let [colors, setColors] = useState([]);
+  // let [colors, setColors] = useState([]);
   let entireHistory = useSelector((state) => state.salesHistory);
-  let salesHistoryRecord = useSelector((state) => state.salesRecord);
+  // let salesHistoryRecord = useSelector((state) => state.salesRecord);
   const dispatch = useDispatch();
   var today = new Date();
   let date =
@@ -46,7 +46,8 @@ export default function Info() {
       let randomColors = [];
       let everyMonthTotal = (specificMonth) => {
         let monthlyTotal = [];
-        const filtered = Object.keys(entireHistory)
+
+        const filtered = Object.keys(entireHistory) // eslint-disable-next-line
           .filter((key) => key[5] == today.getMonth() + specificMonth)
           .reduce((obj, key) => {
             obj[key] = entireHistory[key];
@@ -91,8 +92,9 @@ export default function Info() {
       everyMonthTotal(-1);
       everyMonthTotal(0);
       everyMonthTotal(1);
-      setColors(randomColors);
+      // setColors(randomColors);
     }
+    // eslint-disable-next-line
   }, [entireHistory]);
 
   return (

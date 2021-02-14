@@ -1,6 +1,6 @@
 import React from "react";
 import styling from "./Header.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 // import {  } from "../../../../../redux/actions/actions";
 import welcomeImage from "../../../../../assets/welcomeImage.svg";
 

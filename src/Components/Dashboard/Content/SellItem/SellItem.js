@@ -10,7 +10,6 @@ import {
   allCustomers,
   salesItem,
   removeAllCustomerItems,
-  salesRecord,
 } from "../../../../redux/actions/actions";
 import { useReactToPrint } from "react-to-print";
 import GeneratePDF from "./GeneratePDF/generatePDF";
@@ -23,7 +22,7 @@ function SellItem() {
   let shopDetails = useSelector((state) => state.shopDetails);
   let allItems = useSelector((state) => state.salesItem);
   let dispatch = useDispatch();
-  let currentSalesRecord = useSelector((state) => state.salesRecord);
+  // let currentSalesRecord = useSelector((state) => state.salesRecord);
   let entireHistory = useSelector((state) => state.salesHistory);
 
   const componentRef = useRef();

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styling from "./Navbar.module.css";
 import { FiMenu, FiBell } from "react-icons/fi";
 import { BiCaretDown } from "react-icons/bi";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 // import {
 //   isLoggedIn,
 //   userDetails,
@@ -18,7 +18,7 @@ import firebase from "../../../firebase/firebase";
 function Navbar({ toggleSidebar }) {
   let user = useSelector((state) => state.user);
   let [showInfo, setShowInfo] = useState(false);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   let logoutfromGoogle = () => {
     firebase

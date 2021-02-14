@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { MdAdd } from "react-icons/md";
 import ChannelLinks from "./ChannelLinks/ChannelLinks";
 import { FiUsers } from "react-icons/fi";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function Sidebar({ toggleComponent, activeStatus, showAddChannel }) {
   let userDetails = useSelector((state) => state.user);

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import UserCart from "../UserCart/UserCart";
 import styling from "./generatePDF.module.css";
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 
 export default class generatePDF extends Component {
   render() {

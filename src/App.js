@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Routing from "./routing/Routing";
 import firebase from "./firebase/firebase";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   isLoggedIn,
   userDetails,

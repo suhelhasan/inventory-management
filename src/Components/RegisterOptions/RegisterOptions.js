@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import firebase from "../../firebase/firebase";
 import { notify, ToastContainer } from "../Notify/Notify";
 import {
-  isLoggedIn,
   userDetails,
   salesChannelAction,
   salesItem,
@@ -51,7 +50,7 @@ function RegisterOptions() {
 
   if (!loggedIn) {
     return <Redirect to="signin" />;
-  } else if (Object.keys(shopDetailsLocal).length != 0) {
+  } else if (Object.keys(shopDetailsLocal).length !== 0) {
     return <Redirect to="/dashboard" />;
   }
   let checkPasscode = () => {

@@ -3,7 +3,15 @@ import styling from "./Navbar.module.css";
 import { FiMenu, FiBell } from "react-icons/fi";
 import { BiCaretDown } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
-import { isLoggedIn, userDetails } from "../../../redux/actions/actions";
+// import {
+//   isLoggedIn,
+//   userDetails,
+//   shopDetails,
+//   salesChannelAction,
+//   salesItem,
+//   allCustomers,
+//   sellingHistory,
+// } from "../../../redux/actions/actions";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import firebase from "../../../firebase/firebase";
 
@@ -17,8 +25,7 @@ function Navbar({ toggleSidebar }) {
       .auth()
       .signOut()
       .then(function () {
-        dispatch(isLoggedIn());
-        dispatch(userDetails({}));
+        window.location.reload();
         console.log("Sign Out SuccessFull");
       })
       .catch(function (error) {

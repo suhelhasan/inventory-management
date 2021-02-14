@@ -65,3 +65,6 @@
   background-color: red;
   margin-left: 30px;
 }
+.hideComponent {
+  display: none;
+}

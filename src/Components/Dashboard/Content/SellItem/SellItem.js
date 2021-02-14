@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styling from "./SellItem.module.css";
 import { notify, ToastContainer } from "../../../Notify/Notify";
 import ProductInput from "./ProductInput/ProductInput";
@@ -6,18 +6,30 @@ import UserCart from "./UserCart/UserCart";
 import { useDispatch, useSelector } from "react-redux";
 import firebase from "../../../../firebase/firebase";
 import {
+  shopSalesHistory,
   allCustomers,
   salesItem,
   removeAllCustomerItems,
+  salesRecord,
 } from "../../../../redux/actions/actions";
+import { useReactToPrint } from "react-to-print";
+import GeneratePDF from "./GeneratePDF/generatePDF";
 
 function SellItem() {
   let [customerName, setCustomerName] = useState("");
   let [customerPhone, setCustomerPhone] = useState("");
   let userCart = useSelector((state) => state.userCart);
   let userInfo = useSelector((state) => state.user);
+  let shopDetails = useSelector((state) => state.shopDetails);
   let allItems = useSelector((state) => state.salesItem);
   let dispatch = useDispatch();
+  let currentSalesRecord = useSelector((state) => state.salesRecord);
+  let entireHistory = useSelector((state) => state.salesHistory);
+
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   let doTask = () => {
     if (customerName.length > 2 && customerPhone.length > 4) {
@@ -56,7 +68,7 @@ function SellItem() {
         .then(() => {
           setCustomerName("");
           setCustomerPhone("");
-          notify("success", "Updated Stock successfully");
+          // notify("success", "Updated Stock successfully");
           dispatch(salesItem({ ...products }));
           dispatch(removeAllCustomerItems([]));
           console.log("Added data successfully");
@@ -77,8 +89,9 @@ function SellItem() {
 
       let todaysSell = {};
       todaysSell[today] = userCart;
-      let sellingHistory = {};
-      sellingHistory[date] = { ...todaysSell };
+
+      let sellingHistory = { ...entireHistory };
+      sellingHistory[date] = { ...todaysSell, ...sellingHistory[date] };
       // putMyData[today] = userCart;
 
       db.collection("shops")
@@ -90,7 +103,8 @@ function SellItem() {
           { merge: true }
         )
         .then(() => {
-          notify("success", "Added");
+          dispatch(shopSalesHistory(sellingHistory));
+          // notify("success", "Added");
         })
         .catch((error) => {
           notify("error", "Customer not added");
@@ -135,14 +149,21 @@ function SellItem() {
         </table>
 
         <ProductInput />
-
         <UserCart doTask={doTask} />
+        <div className={styling.hideComponent}>
+          <GeneratePDF
+            ref={componentRef}
+            userInfo={userInfo}
+            shopDetails={shopDetails}
+          />
+        </div>
         {userCart.length ? (
           <div className={styling.buttonsDiv}>
             <button
               onClick={(e) => {
                 e.preventDefault();
-                alert("Printed");
+                handlePrint();
+                doTask();
               }}
             >
               Print

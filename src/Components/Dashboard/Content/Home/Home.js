@@ -1,21 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styling from "./Home.module.css";
-import Stock from "./Graphs/Stock/Stock";
-import TopSellingProduct from "./Graphs/Top-Selling-Products/Top-Selling-Products";
-// import {  } from "../../../../redux/actions/actions";
 import Header from "./Header/Header";
 import Info from "./Info/Info";
+import { useSelector } from "react-redux";
 
 function Home() {
+  let currentSalesRecord = useSelector((state) => state.salesRecord);
+
+  useEffect(() => {
+    console.log("CURRENT SALES RECORDS", currentSalesRecord);
+  }, [currentSalesRecord]);
+
   return (
     <div className={styling.Home}>
       <Header />
       <Info />
-
-      <div className={styling.bars}>
-        <Stock />
-        <TopSellingProduct />
-      </div>
     </div>
   );
 }

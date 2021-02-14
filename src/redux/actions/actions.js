@@ -60,9 +60,15 @@ export const deleteCustomer = (details) => {
     payload: details,
   };
 };
-export const sellingHistory = (details) => {
+export const shopSalesHistory = (details) => {
   return {
     type: "SALES_HISTORY",
+    payload: details,
+  };
+};
+export const salesRecord = (details) => {
+  return {
+    type: "SALES_RECORD",
     payload: details,
   };
 };

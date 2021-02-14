@@ -5,7 +5,7 @@ import { removeCustomerItems } from "../../../../../redux/actions/actions";
 import { AiOutlineDelete } from "react-icons/ai";
 import { notify, ToastContainer } from "../../../../Notify/Notify";
 
-function UserCart() {
+function UserCart({ hideAction }) {
   let userCart = useSelector((state) => state.userCart);
 
   let dispatch = useDispatch();
@@ -26,9 +26,9 @@ function UserCart() {
                 <th>S. No.</th>
                 <th>Item Name</th>
                 <th>Quantity</th>
-                <th>Price/kg</th>
+                <th>Price</th>
                 <th>Total</th>
-                <th>Action</th>
+                {!hideAction ? <th>Action</th> : null}
               </tr>
               {userCart.map((each, count) => (
                 <tr>
@@ -39,12 +39,14 @@ function UserCart() {
                   </td>
                   <td>{each.sellingPrice}</td>
                   <td>{each.price}</td>
-                  <td>
-                    <AiOutlineDelete
-                      onClick={() => deleteItem(each)}
-                      className={styling.deleteIcon}
-                    />
-                  </td>
+                  {!hideAction ? (
+                    <td>
+                      <AiOutlineDelete
+                        onClick={() => deleteItem(each)}
+                        className={styling.deleteIcon}
+                      />
+                    </td>
+                  ) : null}
                 </tr>
               ))}
             </thead>

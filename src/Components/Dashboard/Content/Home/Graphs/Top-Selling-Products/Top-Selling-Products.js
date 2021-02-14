@@ -7,6 +7,7 @@ export default function TopSellingProducts() {
   let entireHistory = useSelector((state) => state.salesHistory);
   let [totalItems, setTotalItems] = useState([]);
   let [totalItemsValue, setTotalItemsValue] = useState([]);
+  let [colorsArray, setColorsArray] = useState([]);
 
   useEffect(() => {
     if (Object.keys(entireHistory).length) {
@@ -24,36 +25,46 @@ export default function TopSellingProducts() {
       }
       setTotalItems(Object.keys(all));
       setTotalItemsValue(Object.values(all));
+      let colors = [];
+      for (let i = 0; i < Object.keys(all).length; i++) {
+        function r() {
+          return Math.floor(Math.random() * 255);
+        }
+        var color = `rgba(${r()},${r()},${r()},0.7)`;
+        colors.push(color);
+      }
+      setColorsArray(colors);
     }
   }, [entireHistory]);
 
   return (
-    <div className={styling.bar}>
-      <Bar
-        data={{
-          labels: totalItems,
-          datasets: [
+    // <div className={styling.bar}>
+    <Bar
+      className={styling.myGraph}
+      data={{
+        labels: totalItems,
+        datasets: [
+          {
+            label: "Quantity",
+            data: totalItemsValue,
+            backgroundColor: colorsArray,
+          },
+        ],
+      }}
+      options={{
+        legend: { display: false },
+        title: { display: false, text: `Top Selling Products` },
+        scales: {
+          yAxes: [
             {
-              label: "Quantity",
-              backgroundColor: "#5f6dda",
-              data: totalItemsValue,
+              ticks: {
+                beginAtZero: true,
+              },
             },
           ],
-        }}
-        options={{
-          legend: { display: false },
-          title: { display: true, text: `Top Selling Products` },
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true,
-                },
-              },
-            ],
-          },
-        }}
-      />
-    </div>
+        },
+      }}
+    />
+    // </div>
   );
 }

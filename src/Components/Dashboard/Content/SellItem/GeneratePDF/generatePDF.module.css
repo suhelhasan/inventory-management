@@ -1,0 +1,19 @@
+.generatePDF {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+.infoSection {
+  display: flex;
+  justify-content: space-between;
+}
+.shopInfo {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.shopInfo > h1 {
+  text-transform: capitalize;
+}

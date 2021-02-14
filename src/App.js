@@ -9,7 +9,7 @@ import {
   salesItem,
   allCustomers,
   shopDetails,
-  sellingHistory,
+  shopSalesHistory,
 } from "./redux/actions/actions";
 import "./App.css";
 
@@ -44,7 +44,7 @@ function App() {
                       );
                       dispatch(salesItem(doc.data().products));
                       dispatch(allCustomers(doc.data().customers));
-                      dispatch(sellingHistory(doc.data().sellingHistory));
+                      dispatch(shopSalesHistory(doc.data().sellingHistory));
                     } else {
                       console.log("No such document!");
                     }
@@ -75,7 +75,7 @@ function App() {
                         );
                         dispatch(salesItem(doc.data().products));
                         dispatch(allCustomers(doc.data().customers));
-                        dispatch(sellingHistory(doc.data().sellingHistory));
+                        dispatch(shopSalesHistory(doc.data().sellingHistory));
                         console.log(
                           "SHOP SALES HISTORY",
                           doc.data().sellingHistory

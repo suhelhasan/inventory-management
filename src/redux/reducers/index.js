@@ -6,6 +6,7 @@ import userCart from "./customerItems";
 import customers from "./customers";
 import shopDetails from "./shopDetails";
 import salesHistory from "./salesHistory";
+import salesRecord from "./salesRecord";
 
 import { combineReducers } from "redux";
 
@@ -18,4 +19,5 @@ export const allReducers = combineReducers({
   customers,
   shopDetails,
   salesHistory,
+  salesRecord,
 });

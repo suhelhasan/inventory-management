@@ -92,7 +92,6 @@ export default function Info() {
       everyMonthTotal(-1);
       everyMonthTotal(0);
       everyMonthTotal(1);
-      // setColors(randomColors);
     }
     // eslint-disable-next-line
   }, [entireHistory]);

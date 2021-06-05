@@ -149,7 +149,7 @@ export default function Info() {
         <div className={styling.monthlyBar}>
           <Line
             data={{
-              labels: ["Dec", "Jan", "Fab"],
+              labels: ["Apr", "May", "Jun"],
               datasets: [
                 {
                   label: "Quantity",

@@ -8,6 +8,7 @@ import { MdFavoriteBorder } from "react-icons/md";
 import { BiCart } from "react-icons/bi";
 import { AiOutlineStock } from "react-icons/ai";
 import { salesRecord } from "../../../../../redux/actions/actions";
+import moment from 'moment';
 
 export default function Info() {
   let [todaysSell, setTodaysSell] = useState(0);
@@ -16,6 +17,13 @@ export default function Info() {
   let [lastMonthSell, setLastMonthSell] = useState(0);
   let [oneDayVisits, setOneDayVisits] = useState(0);
   let [monthlyVisits, setMonthlyVisits] = useState(0);
+  let [threeMonths,setThreeMonths] = useState([]);
+  useEffect(()=>{
+    let first = moment().subtract(2,"M").format("MMMM");
+    let second = moment().subtract(1,"M").format("MMMM");
+    let third = moment().subtract(0,"M").format("MMMM");
+    setThreeMonths([first,second,third]);
+  },[]);
   // let [colors, setColors] = useState([]);
   let entireHistory = useSelector((state) => state.salesHistory);
   // let salesHistoryRecord = useSelector((state) => state.salesRecord);
@@ -149,7 +157,7 @@ export default function Info() {
         <div className={styling.monthlyBar}>
           <Line
             data={{
-              labels: ["Apr", "May", "Jun"],
+              labels: threeMonths,
               datasets: [
                 {
                   label: "Quantity",
